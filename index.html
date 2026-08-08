@@ -1,2649 +1,587 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
->
-
-<title>Technician Grooming Monitoring</title>
-
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Monitoring APD Teknisi</title>
 <style>
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-:root {
-  --navy: #12395b;
-  --navy-light: #1d527d;
-  --navy-pale: #eaf2f8;
-
-  --green: #22a06b;
-  --green-pale: #e9f7f0;
-
-  --gray-100: #f5f6f7;
-  --gray-200: #e1e4e8;
-  --gray-400: #9ca3af;
-  --gray-600: #6b7280;
-  --gray-800: #374151;
-
-  --radius-sm: 7px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
-  background: #f7f8fa;
-  color: var(--gray-800);
-}
-
-body {
-  -webkit-tap-highlight-color: transparent;
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header {
-  background: var(--navy);
-  padding: 16px 20px 20px;
-}
-
-.header-inner {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.header-icon {
-  width: 38px;
-  height: 38px;
-  background: rgba(255,255,255,0.12);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.header-icon svg {
-  width: 20px;
-  height: 20px;
-  color: #fff;
-}
-
-.header h1 {
-  font-size: 15px;
-  font-weight: 600;
-  color: #fff;
-  line-height: 1.3;
-  margin: 0;
-}
-
-.header p {
-  font-size: 12px;
-  color: rgba(255,255,255,0.6);
-  margin-top: 1px;
-  margin-bottom: 0;
-}
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progress-wrap {
-  padding: 14px 20px 0;
-  display: flex;
-  gap: 5px;
-  background: var(--navy);
-}
-
-.progress-step {
-  flex: 1;
-  height: 3px;
-  border-radius: 2px;
-  background: rgba(255,255,255,0.2);
-  transition: background 0.3s;
-}
-
-.progress-step.done {
-  background: #fff;
-}
-
-.progress-step.active {
-  background: #5ba3e0;
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.main {
-  padding: 16px 16px 48px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-
-/* =========================================================
-   CARD
-========================================================= */
-
-.card {
-  background: #fff;
-  border-radius: var(--radius-lg);
-  border: 0.5px solid var(--gray-200);
-  overflow: hidden;
-}
-
-.card-head {
-  padding: 14px 16px 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-bottom: 0.5px solid var(--gray-200);
-}
-
-.card-head svg {
-  width: 16px;
-  height: 16px;
-  color: var(--gray-600);
-  flex-shrink: 0;
-}
-
-.card-head span {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--gray-600);
-}
-
-.card-body {
-  padding: 14px 16px;
-}
-
-
-/* =========================================================
-   FIELD
-========================================================= */
-
-.field + .field {
-  margin-top: 10px;
-}
-
-.field label {
-  display: block;
-  font-size: 12px;
-  color: var(--gray-600);
-  margin-bottom: 5px;
-  font-weight: 500;
-}
-
-.field select,
-.field input[type="text"] {
-  width: 100%;
-  padding: 10px 12px;
-  font-size: 14px;
-  border: 0.5px solid var(--gray-200);
-  border-radius: var(--radius-sm);
-  background: var(--gray-100);
-  color: var(--gray-800);
-  appearance: none;
-  -webkit-appearance: none;
-  outline: none;
-  transition: border-color 0.15s;
-}
-
-.field select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 32px;
-}
-
-.field select:focus,
-.field input[type="text"]:focus {
-  border-color: var(--navy);
-  background: #fff;
-}
-
-.field input[type="text"]::placeholder {
-  color: var(--gray-400);
-}
-
-
-/* =========================================================
-   TIMESTAMP
-========================================================= */
-
-.timestamp-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: var(--navy-pale);
-  color: var(--navy);
-  font-size: 12px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  margin-top: 10px;
-}
-
-.timestamp-pill svg {
-  width: 13px;
-  height: 13px;
-}
-
-
-/* =========================================================
-   PHOTO SECTION
-========================================================= */
-
-.photo-section-label {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--gray-600);
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.photo-section-label .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--navy);
-}
-
-.photo-note {
-  font-size: 11px;
-  color: var(--gray-400);
-  margin-bottom: 12px;
-  line-height: 1.5;
-}
-
-
-/* =========================================================
-   PHOTO GRID
-========================================================= */
-
-.photo-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-
-/* =========================================================
-   PHOTO BOX
-========================================================= */
-
-.photo-box {
-  border: 1.5px dashed var(--gray-200);
-  border-radius: var(--radius-md);
-  min-height: 150px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition:
-    border-color 0.2s,
-    background 0.2s;
-  background: var(--gray-100);
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-.photo-box:active {
-  opacity: 0.85;
-  transform: scale(0.99);
-}
-
-.photo-box .ph-icon {
-  color: var(--gray-400);
-  margin-bottom: 6px;
-}
-
-.photo-box .ph-icon svg {
-  width: 28px;
-  height: 28px;
-}
-
-.photo-box .ph-label {
-  font-size: 11px;
-  color: var(--gray-400);
-  text-align: center;
-  padding: 0 8px;
-  line-height: 1.4;
-}
-
-.photo-box .ph-sub {
-  font-size: 10px;
-  color: var(--gray-400);
-  margin-top: 3px;
-  opacity: 0.7;
-}
-
-
-/* =========================================================
-   PHOTO HAS PHOTO
-========================================================= */
-
-.photo-box.has-photo {
-  border-style: solid;
-  border-color: var(--green);
-  background: #fff;
-}
-
-.photo-box img.preview {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  inset: 0;
-}
-
-
-/* =========================================================
-   DONE BADGE
-========================================================= */
-
-.photo-box .done-badge {
-  position: absolute;
-  top: 7px;
-  right: 7px;
-  width: 22px;
-  height: 22px;
-  background: var(--green);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-
-.photo-box .done-badge svg {
-  width: 12px;
-  height: 12px;
-  color: #fff;
-}
-
-
-/* =========================================================
-   RETRY BUTTON
-========================================================= */
-
-.photo-box .retry-btn {
-  position: absolute;
-  bottom: 7px;
-  right: 7px;
-  background: rgba(0,0,0,0.55);
-  border-radius: 6px;
-  padding: 5px 8px;
-  font-size: 10px;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  z-index: 2;
-  border: none;
-  cursor: pointer;
-}
-
-.photo-box .retry-btn svg {
-  width: 11px;
-  height: 11px;
-}
-
-
-/* =========================================================
-   GUIDE
-========================================================= */
-
-.guide-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 8px 4px;
-  gap: 4px;
-}
-
-.guide-box .guide-title {
-  font-size: 12px;
-  color: var(--gray-600);
-  font-weight: 500;
-  margin-bottom: 4px;
-}
-
-.guide-box .guide-item {
-  font-size: 11px;
-  color: var(--gray-400);
-  line-height: 1.6;
-}
-
-
-/* =========================================================
-   CHECKLIST
-========================================================= */
-
-.checklist {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 12px;
-}
-
-.check-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: var(--gray-400);
-  transition: color 0.2s;
-}
-
-.check-item.ok {
-  color: var(--green);
-}
-
-.check-item svg {
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
-}
-
-
-/* =========================================================
-   PREVIEW
-========================================================= */
-
-.preview-wrap {
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 0.5px solid var(--gray-200);
-}
-
-#result-canvas {
-  width: 100%;
-  display: block;
-}
-
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-.status-bar {
-  display: flex;
-  gap: 6px;
-  margin-top: 10px;
-}
-
-.status-chip {
-  flex: 1;
-  padding: 7px 8px;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11px;
-  font-weight: 500;
-}
-
-.status-chip svg {
-  width: 13px;
-  height: 13px;
-  flex-shrink: 0;
-}
-
-.status-chip.done {
-  background: var(--green-pale);
-  color: var(--green);
-}
-
-
-/* =========================================================
-   DOWNLOAD BUTTON
-========================================================= */
-
-.btn-download {
-  width: 100%;
-  background: var(--navy);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius-md);
-  padding: 14px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition:
-    background 0.15s,
-    transform 0.1s;
-}
-
-.btn-download svg {
-  width: 18px;
-  height: 18px;
-}
-
-.btn-download:disabled {
-  background: var(--gray-200);
-  color: var(--gray-400);
-  cursor: not-allowed;
-}
-
-.btn-download:not(:disabled):active {
-  transform: scale(0.98);
-  background: var(--navy-light);
-}
-
-.hint-text {
-  text-align: center;
-  font-size: 11px;
-  color: var(--gray-400);
-  margin-top: 6px;
-  line-height: 1.5;
-}
-
-
-/* =========================================================
-   HIDDEN CANVAS
-========================================================= */
-
-#hidden-canvas {
-  display: none;
-}
-
-
-/* =========================================================
-   PHOTO SOURCE MODAL
-========================================================= */
-
-.photo-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  background: rgba(0,0,0,0.45);
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.photo-modal.show {
-  display: flex;
-}
-
-.photo-modal-content {
-  width: 100%;
-  max-width: 500px;
-  background: #fff;
-  border-radius: 16px 16px 0 0;
-  padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
-  box-shadow: 0 -5px 25px rgba(0,0,0,0.18);
-}
-
-.photo-modal-title {
-  text-align: center;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--gray-800);
-  margin-bottom: 14px;
-}
-
-.photo-source-btn {
-  width: 100%;
-  border: 0;
-  background: var(--gray-100);
-  color: var(--gray-800);
-  border-radius: var(--radius-md);
-  padding: 13px 12px;
-  margin-bottom: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.photo-source-btn:active {
-  transform: scale(0.98);
-}
-
-.photo-cancel-btn {
-  width: 100%;
-  border: 0;
-  background: transparent;
-  color: var(--gray-400);
-  border-radius: var(--radius-md);
-  padding: 12px;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 480px) {
-
-  .main {
-    padding-left: 12px;
-    padding-right: 12px;
+  :root {
+    --navy: #1a3a5c;
+    --navy-light: #254e7a;
+    --navy-pale: #e8eef5;
+    --green: #2e7d5e;
+    --green-pale: #e6f4ef;
+    --amber: #b45309;
+    --amber-pale: #fef3c7;
+    --gray-100: #f5f6f7;
+    --gray-200: #e9eaec;
+    --gray-400: #9ca3af;
+    --gray-600: #4b5563;
+    --gray-800: #1f2937;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
   }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gray-100); color: var(--gray-800); min-height: 100vh; }
 
-  .photo-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+  .header { background: var(--navy); padding: 16px 20px 20px; }
+  .header-inner { display: flex; align-items: center; gap: 12px; }
+  .header-icon { width: 38px; height: 38px; background: rgba(255,255,255,0.12); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .header-icon svg { width: 20px; height: 20px; color: #fff; }
+  .header h1 { font-size: 15px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .header p { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 1px; }
 
-  .photo-box {
-    min-height: 150px;
-  }
+  .progress-wrap { padding: 14px 20px 0; display: flex; gap: 5px; background: var(--navy); }
+  .progress-step { flex: 1; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.2); transition: background 0.3s; }
+  .progress-step.done { background: #fff; }
+  .progress-step.active { background: #5ba3e0; }
 
-}
+  .main { padding: 16px 16px 48px; display: flex; flex-direction: column; gap: 12px; }
 
+  .card { background: #fff; border-radius: var(--radius-lg); border: 0.5px solid var(--gray-200); overflow: hidden; }
+  .card-head { padding: 14px 16px 10px; display: flex; align-items: center; gap: 8px; border-bottom: 0.5px solid var(--gray-200); }
+  .card-head svg { width: 16px; height: 16px; color: var(--gray-600); flex-shrink: 0; }
+  .card-head span { font-size: 13px; font-weight: 500; color: var(--gray-600); }
+  .card-body { padding: 14px 16px; }
 
-/* =========================================================
-   SMALL SCREEN
-========================================================= */
+  .field + .field { margin-top: 10px; }
+  .field label { display: block; font-size: 12px; color: var(--gray-600); margin-bottom: 5px; font-weight: 500; }
+  .field select, .field input[type="text"] { width: 100%; padding: 10px 12px; font-size: 14px; border: 0.5px solid var(--gray-200); border-radius: var(--radius-sm); background: var(--gray-100); color: var(--gray-800); appearance: none; -webkit-appearance: none; outline: none; transition: border-color 0.15s; }
+  .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+  .field select:focus, .field input[type="text"]:focus { border-color: var(--navy); background: #fff; }
+  .field input[type="text"]::placeholder { color: var(--gray-400); }
 
-@media (max-width: 360px) {
+  .timestamp-pill { display: inline-flex; align-items: center; gap: 5px; background: var(--navy-pale); color: var(--navy); font-size: 12px; padding: 4px 10px; border-radius: 20px; margin-top: 10px; }
+  .timestamp-pill svg { width: 13px; height: 13px; }
 
-  .photo-grid {
-    grid-template-columns: 1fr;
-  }
+  .photo-section-label { font-size: 12px; font-weight: 500; color: var(--gray-600); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .photo-section-label .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--navy); }
+  .photo-note { font-size: 11px; color: var(--gray-400); margin-bottom: 12px; line-height: 1.5; }
 
-  .guide-box {
-    padding: 4px;
-  }
+  .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .photo-box { border: 1.5px dashed var(--gray-200); border-radius: var(--radius-md); min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden; transition: border-color 0.2s, background 0.2s; background: var(--gray-100); }
+  .photo-box:active { opacity: 0.85; }
+  .photo-box .ph-icon { color: var(--gray-400); margin-bottom: 6px; }
+  .photo-box .ph-icon svg { width: 28px; height: 28px; }
+  .photo-box .ph-label { font-size: 11px; color: var(--gray-400); text-align: center; padding: 0 8px; line-height: 1.4; }
+  .photo-box .ph-sub { font-size: 10px; color: var(--gray-400); margin-top: 3px; opacity: 0.7; }
+  /* input file diletakkan di luar photo-box, dipicu via JS */
+  .photo-box.has-photo { border-style: solid; border-color: var(--green); background: #fff; }
+  .photo-box img.preview { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+  .photo-box .done-badge { position: absolute; top: 7px; right: 7px; width: 22px; height: 22px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; }
+  .photo-box .done-badge svg { width: 12px; height: 12px; color: #fff; }
+  .photo-box .retry-btn { position: absolute; bottom: 7px; right: 7px; background: rgba(0,0,0,0.55); border-radius: 6px; padding: 3px 7px; font-size: 10px; color: #fff; display: flex; align-items: center; gap: 3px; z-index: 2; }
+  .photo-box .retry-btn svg { width: 11px; height: 11px; }
 
-}
+  .guide-box { display: flex; flex-direction: column; justify-content: center; padding: 8px 4px; gap: 4px; }
+  .guide-box .guide-title { font-size: 12px; color: var(--gray-600); font-weight: 500; margin-bottom: 4px; }
+  .guide-box .guide-item { font-size: 11px; color: var(--gray-400); line-height: 1.6; }
 
+  .checklist { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+  .check-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--gray-400); transition: color 0.2s; }
+  .check-item.ok { color: var(--green); }
+  .check-item svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  .preview-wrap { border-radius: var(--radius-md); overflow: hidden; border: 0.5px solid var(--gray-200); }
+  #result-canvas { width: 100%; display: block; }
+
+  .status-bar { display: flex; gap: 6px; margin-top: 10px; }
+  .status-chip { flex: 1; padding: 7px 8px; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; }
+  .status-chip svg { width: 13px; height: 13px; flex-shrink: 0; }
+  .status-chip.done { background: var(--green-pale); color: var(--green); }
+
+  .btn-download { width: 100%; background: var(--navy); color: #fff; border: none; border-radius: var(--radius-md); padding: 14px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.15s, transform 0.1s; }
+  .btn-download svg { width: 18px; height: 18px; }
+  .btn-download:disabled { background: var(--gray-200); color: var(--gray-400); cursor: not-allowed; }
+  .btn-download:not(:disabled):active { transform: scale(0.98); background: var(--navy-light); }
+  .hint-text { text-align: center; font-size: 11px; color: var(--gray-400); margin-top: 6px; line-height: 1.5; }
+
+  #hidden-canvas { display: none; }
 </style>
-
 </head>
-
-
 <body>
 
-
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
 <div class="header">
-
   <div class="header-inner">
-
     <div class="header-icon">
-
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.7"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
-
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     </div>
-
     <div>
-
-      <h1>
-        Technician Grooming Monitoring
-      </h1>
-
-      <p>
-        Dokumentasi penggunaan grooming kit
-      </p>
-
+      <h1>Monitoring APD Teknisi</h1>
+      <p>Kit masker &amp; sepatu pengganti</p>
     </div>
-
   </div>
-
 </div>
-
-
-<!-- =========================================================
-     PROGRESS
-========================================================= -->
-
 <div class="progress-wrap">
-
-  <div class="progress-step done"></div>
-
-  <div class="progress-step active"></div>
-
-  <div class="progress-step"></div>
-
+  <div class="progress-step active" id="prog-1"></div>
+  <div class="progress-step" id="prog-2"></div>
+  <div class="progress-step" id="prog-3"></div>
 </div>
-
-
-<!-- =========================================================
-     MAIN
-========================================================= -->
 
 <div class="main">
 
-
-  <!-- =======================================================
-       DATA TEKNISI
-  ======================================================== -->
-
+  <!-- DATA KUNJUNGAN -->
   <div class="card">
-
     <div class="card-head">
-
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.7"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
-
-      <span>
-        Data Teknisi
-      </span>
-
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span>Data kunjungan</span>
     </div>
-
-
     <div class="card-body">
-
       <div class="field">
-
-        <label>
-          Nama Teknisi
-        </label>
-
-        <input
-          type="text"
-          id="technician-name"
-          placeholder="Masukkan nama teknisi"
-        >
-
+        <label for="sc">Service center</label>
+        <select id="sc" onchange="onSCChange()">
+          <option value="">— Pilih service center —</option>
+        </select>
       </div>
-
-
       <div class="field">
-
-        <label>
-          Service Center
-        </label>
-
-        <input
-          type="text"
-          id="service-center"
-          placeholder="Masukkan nama service center"
-        >
-
+        <label for="teknisi">Nama teknisi</label>
+        <select id="teknisi" onchange="checkReady()">
+          <option value="">— Pilih service center dulu —</option>
+        </select>
       </div>
-
-
+      <div class="field">
+        <label for="laporan">Nomor laporan</label>
+        <input type="text" id="laporan" placeholder="Contoh: WO-2025-001234" maxlength="30" autocomplete="off" oninput="checkReady()" />
+      </div>
       <div class="timestamp-pill">
-
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <circle cx="12" cy="12" r="10"/>
-          <polyline points="12 6 12 12 16 14"/>
-        </svg>
-
-        <span id="timestamp">
-          -
-        </span>
-
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span id="ts-text">Memuat waktu...</span>
       </div>
-
     </div>
-
   </div>
 
-
-  <!-- =======================================================
-       FOTO GROOMING
-  ======================================================== -->
-
+  <!-- UPLOAD FOTO -->
   <div class="card">
-
     <div class="card-head">
-
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.7"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-
-        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-
-        <circle
-          cx="12"
-          cy="13"
-          r="4"
-        />
-
-      </svg>
-
-      <span>
-        Dokumentasi Grooming
-      </span>
-
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      <span>Foto APD sebelum masuk</span>
     </div>
-
-
     <div class="card-body">
+      <p class="photo-note">Ambil foto sebelum memasuki rumah konsumen. Pastikan masker sudah terpasang dan sepatu pengganti sudah dipakai.</p>
 
-
-      <div class="photo-note">
-
-        Silakan ambil foto menggunakan kamera atau pilih foto yang sudah tersimpan di perangkat.
-
-      </div>
-
-
-      <!-- ===================================================
-           FOTO 1
-      ==================================================== -->
-
-      <div class="photo-section-label">
-
-        <div class="dot"></div>
-
-        Foto 1 — Masker terpasang
-
-      </div>
-
-
-      <!-- CAMERA MASKER -->
-
-      <input
-        type="file"
-        id="file-masker-camera"
-        accept="image/*"
-        capture="environment"
-        style="display:none"
-        onchange="handlePhoto(this,'masker')"
-      >
-
-
-      <!-- UPLOAD MASKER -->
-
-      <input
-        type="file"
-        id="file-masker-upload"
-        accept="image/*"
-        style="display:none"
-        onchange="handlePhoto(this,'masker')"
-      >
-
-
-      <div
-        class="photo-grid"
-        style="margin-bottom:16px"
-      >
-
-
-        <div
-          class="photo-box"
-          id="box-masker"
-          onclick="openPhotoModal('masker')"
-        >
-
-          <div class="ph-icon">
-
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-
-              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-
-              <circle
-                cx="12"
-                cy="13"
-                r="4"
-              />
-
-            </svg>
-
-          </div>
-
-
-          <div class="ph-label">
-
-            Ketuk untuk foto
-
-          </div>
-
-
-          <div class="ph-sub">
-
-            Kamera / Upload
-
-          </div>
-
+      <div class="photo-section-label"><div class="dot"></div>Foto 1 — Masker terpasang</div>
+      <input type="file" id="file-masker" accept="image/*" style="display:none" onchange="handlePhoto(this,'masker')">
+      <div class="photo-grid" style="margin-bottom:16px">
+        <div class="photo-box" id="box-masker" onclick="document.getElementById('file-masker').click()">
+          <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+          <div class="ph-label">Ketuk untuk foto</div>
+          <div class="ph-sub">Kamera atau galeri</div>
         </div>
-
-
         <div class="guide-box">
-
-          <div class="guide-title">
-
-            Panduan:
-
-          </div>
-
-          <div class="guide-item">
-
-            ✓ Wajah terlihat jelas
-
-          </div>
-
-          <div class="guide-item">
-
-            ✓ Masker menutupi hidung &amp; mulut
-
-          </div>
-
-          <div class="guide-item">
-
-            ✓ Pencahayaan cukup
-
-          </div>
-
+          <div class="guide-title">Panduan:</div>
+          <div class="guide-item">✓ Wajah terlihat jelas</div>
+          <div class="guide-item">✓ Masker menutupi hidung &amp; mulut</div>
+          <div class="guide-item">✓ Pencahayaan cukup</div>
         </div>
-
       </div>
 
-
-      <!-- ===================================================
-           FOTO 2
-      ==================================================== -->
-
-      <div class="photo-section-label">
-
-        <div class="dot"></div>
-
-        Foto 2 — Sepatu pengganti
-
-      </div>
-
-
-      <!-- CAMERA SEPATU -->
-
-      <input
-        type="file"
-        id="file-sepatu-camera"
-        accept="image/*"
-        capture="environment"
-        style="display:none"
-        onchange="handlePhoto(this,'sepatu')"
-      >
-
-
-      <!-- UPLOAD SEPATU -->
-
-      <input
-        type="file"
-        id="file-sepatu-upload"
-        accept="image/*"
-        style="display:none"
-        onchange="handlePhoto(this,'sepatu')"
-      >
-
-
+      <div class="photo-section-label"><div class="dot"></div>Foto 2 — Sepatu pengganti</div>
+      <input type="file" id="file-sepatu" accept="image/*" style="display:none" onchange="handlePhoto(this,'sepatu')">
       <div class="photo-grid">
-
-
-        <div
-          class="photo-box"
-          id="box-sepatu"
-          onclick="openPhotoModal('sepatu')"
-        >
-
-          <div class="ph-icon">
-
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-
-              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-
-              <circle
-                cx="12"
-                cy="13"
-                r="4"
-              />
-
-            </svg>
-
-          </div>
-
-
-          <div class="ph-label">
-
-            Ketuk untuk foto
-
-          </div>
-
-
-          <div class="ph-sub">
-
-            Kamera / Upload
-
-          </div>
-
+        <div class="photo-box" id="box-sepatu" onclick="document.getElementById('file-sepatu').click()">
+          <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+          <div class="ph-label">Ketuk untuk foto</div>
+          <div class="ph-sub">Kamera atau galeri</div>
         </div>
-
-
         <div class="guide-box">
-
-          <div class="guide-title">
-
-            Panduan:
-
-          </div>
-
-          <div class="guide-item">
-
-            ✓ Kedua sepatu terlihat
-
-          </div>
-
-          <div class="guide-item">
-
-            ✓ Foto dari depan/atas
-
-          </div>
-
-          <div class="guide-item">
-
-            ✓ Sepatu bersih terpasang
-
-          </div>
-
+          <div class="guide-title">Panduan:</div>
+          <div class="guide-item">✓ Kedua sepatu terlihat</div>
+          <div class="guide-item">✓ Foto dari depan/atas</div>
+          <div class="guide-item">✓ Sepatu bersih terpasang</div>
         </div>
-
       </div>
-
-
-      <!-- ===================================================
-           CHECKLIST
-      ==================================================== -->
 
       <div class="checklist">
-
-
-        <div
-          class="check-item"
-          id="chk-masker"
-        >
-
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-            />
-
-            <polyline points="12 8 12 12 14 14"/>
-
-          </svg>
-
+        <div class="check-item" id="chk-masker">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
           Foto masker belum diupload
-
         </div>
-
-
-        <div
-          class="check-item"
-          id="chk-sepatu"
-        >
-
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-            />
-
-            <polyline points="12 8 12 12 14 14"/>
-
-          </svg>
-
+        <div class="check-item" id="chk-sepatu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
           Foto sepatu belum diupload
-
         </div>
-
-
       </div>
-
     </div>
-
   </div>
 
-
-  <!-- =======================================================
-       PREVIEW
-  ======================================================== -->
-
-  <div class="card">
-
+  <!-- PREVIEW -->
+  <div class="card" id="card-preview" style="display:none">
     <div class="card-head">
-
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.7"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-
-        <rect
-          x="3"
-          y="3"
-          width="18"
-          height="18"
-          rx="2"
-          ry="2"
-        />
-
-        <circle
-          cx="8.5"
-          cy="8.5"
-          r="1.5"
-        />
-
-        <polyline
-          points="21 15 16 10 5 21"
-        />
-
-      </svg>
-
-      <span>
-        Preview Dokumentasi
-      </span>
-
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>Preview hasil gambar</span>
     </div>
-
-
     <div class="card-body">
-
-      <div class="preview-wrap">
-
-        <canvas id="result-canvas"></canvas>
-
-      </div>
-
-
+      <div class="preview-wrap"><canvas id="result-canvas"></canvas></div>
       <div class="status-bar">
-
-        <div
-          class="status-chip"
-          id="status-masker"
-        >
-
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-            />
-
-            <polyline points="16 9 10 15 7 12"/>
-
-          </svg>
-
-          Masker
-
+        <div class="status-chip done">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          2 foto lengkap
         </div>
-
-
-        <div
-          class="status-chip"
-          id="status-sepatu"
-        >
-
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-            />
-
-            <polyline points="16 9 10 15 7 12"/>
-
-          </svg>
-
-          Sepatu
-
+        <div class="status-chip done">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Timestamp otomatis
         </div>
-
       </div>
-
     </div>
-
   </div>
 
-
-  <!-- =======================================================
-       DOWNLOAD
-  ======================================================== -->
-
-  <div>
-
-    <button
-      class="btn-download"
-      id="btn-download"
-      type="button"
-      disabled
-      onclick="downloadResult()"
-    >
-
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-
-        <polyline points="7 10 12 15 17 10"/>
-
-        <line
-          x1="12"
-          y1="15"
-          x2="12"
-          y2="3"
-        />
-
-      </svg>
-
-      Download Dokumentasi
-
-    </button>
-
-
-    <div class="hint-text">
-
-      Lengkapi kedua foto sebelum mengunduh dokumentasi.
-
-    </div>
-
-  </div>
-
+  <!-- DOWNLOAD -->
+  <button class="btn-download" id="btn-download" disabled onclick="downloadResult()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Lengkapi data untuk download
+  </button>
+  <p class="hint-text" id="hint-text">Isi semua data &amp; upload 2 foto untuk mengaktifkan download</p>
 
 </div>
-
-
-<!-- =========================================================
-     PHOTO SOURCE MODAL
-========================================================= -->
-
-<div
-  class="photo-modal"
-  id="photo-modal"
-  onclick="closePhotoModalOutside(event)"
->
-
-
-  <div
-    class="photo-modal-content"
-    onclick="event.stopPropagation()"
-  >
-
-
-    <div class="photo-modal-title">
-
-      Pilih Sumber Foto
-
-    </div>
-
-
-    <!-- CAMERA -->
-
-    <button
-      type="button"
-      class="photo-source-btn"
-      onclick="chooseCamera()"
-    >
-
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-
-        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-
-        <circle
-          cx="12"
-          cy="13"
-          r="4"
-        />
-
-      </svg>
-
-      Ambil Foto dengan Kamera
-
-    </button>
-
-
-    <!-- UPLOAD -->
-
-    <button
-      type="button"
-      class="photo-source-btn"
-      onclick="chooseUpload()"
-    >
-
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-
-        <polyline points="17 8 12 3 7 8"/>
-
-        <line
-          x1="12"
-          y1="3"
-          x2="12"
-          y2="15"
-        />
-
-      </svg>
-
-      Upload dari Galeri
-
-    </button>
-
-
-    <!-- CANCEL -->
-
-    <button
-      type="button"
-      class="photo-cancel-btn"
-      onclick="closePhotoModal()"
-    >
-
-      Batal
-
-    </button>
-
-
-  </div>
-
-</div>
-
-
-<!-- =========================================================
-     HIDDEN CANVAS
-========================================================= -->
 
 <canvas id="hidden-canvas"></canvas>
 
-
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
-
 <script>
-
-
-/* =========================================================
-   GLOBAL VARIABLES
-========================================================= */
-
-let selectedPhotoType = null;
-
-let photos = {
-  masker: null,
-  sepatu: null
+// ── DATA SERVICE CENTER & TEKNISI ──
+const SC_DATA = {
+  "SERVICE CENTER SURABAYA": ["BUDIONO","DADAD TRI PURWOKO","DARWIYANTO","M. SOLIKHUDIN SALAM","TMM - DADAD TRI PURWOKO","TMM - MISDIANTO","WAHYU BAGUS PRASONGKO","ERFAN YULIANTO"],
+  "SERVICE CENTER MSC SURABAYA GWALK": ["TECHNICIAN (MSC SURABAYA GWALK)"],
+  "SERVICE CENTER MSC SURABAYA MAYJEND SUNGKONO": ["WAHYU BAGUS PRASONGKO SBY MAYJEND SUNGKONO"],
+  "SERVICE CENTER JAKARTA 1": ["ANDRI DIAPRAMA","BUDI SETIAWAN","EKA SASMITA","MARDANI FAJRIN","MUSTAFA ZAENUDIN BASRI","RAHMAT PERMANA","REZA BACHTIYAR","TAUFIK HIDAYAT","TMM - AZI ULULAZMI","TMM - NASRUDIN","TMM - WISNU UTOMO","WAGINO","WISNU UTOMO"],
+  "SERVICE CENTER JAKARTA 2": ["BUDI SETIAWAN","EKA SASMITA","RAHMAT PERMANA","AAN SUGIANTO","AGUNG INDRA SETIAWAN","AGUS SETIAWAN","AHMAD RIZALDI","ARIP WIBOWO","EKA TASWAYA","FAJAR AGUNG AHIRUDIN","FHADLIEYAN SAH","FIRMANSYAH","ISWANDI","KOSASIH","RISMAU L TISNA","TAUFIK HIDAYAT 2","TMM - HERO SRI ADJI","TMM - MEGA ARIF TRIYANA","TMM - WAHYU WIDODO","TOTO","WIDY AGUSTIAN PUTRA","YOGA DWI WIBAWA","TMM - TEGUH HARYANTO"],
+  "SERVICE CENTER JAKARTA 3": ["BUDI SETIAWAN","EKA SASMITA","RAHMAT PERMANA","ARIP WIBOWO","AKHIRUDIN","ANDHIKA ABDIEL","DERA SANTOSO","FERDIAN","KURNIA HANDOYO","M. YOGI YANTO","MEYDI KARAMOY","TAUFIK HIDAYAT 3","TMM - DIAN HENDRA PUTRA","TMM - WAWAN","TRESNO PANCA","YUSUF HIDAYAT","DIAN HENDRA PUTRA"],
+  "SERVICE CENTER JAKARTA 4 JATAKE": ["RAHMAT PERMANA"],
+  "SERVICE CENTER MSC SURYO": ["AGUS MSC SURYO","FHADLE MSC SURYO","ISWANDI MSC SURYO"],
+  "SERVICE CENTER MSC KEMANG": ["TMM BAGAS GREENLAKE","TEKNISI VIP KEMANG HERY W","TMM - HERO TEK INSTALL","TMM - MEGA TEK INSTALL","TMM - RIO TEK INSTALL","TMM - FIRMANSYAH"],
+  "SERVICE CENTER MSC GREENLAKE": ["JAMRONI GREENLAKE","JULIANTO GREENLAKE","TMM BAGAS GREENLAKE"],
+  "SERVICE CENTER MSC BOGOR": ["ASEP NURDIN MSC BOGOR","HERMANTO MSC BOGOR","TAUFIK HIDAYAT BGR","TEGUH HARTONO MSC BOGOR"],
+  "SERVICE CENTER BANDUNG": ["ARIF RAHMAN","DENNY SABANY","GILANG FAJAR SAPUTRA","JAJANG NUROHMAN","TMM - ARIEF NOOR HIDAYAT","TMM - BUDHY SYAHBUDIN","YADI SUPRIYADI"],
+  "SERVICE CENTER MSC KBP BANDUNG": ["GILANG FAJAR SAPUTRA"],
+  "SERVICE CENTER MALANG": ["LUKMAN HAKIM","MAHNUN ARIF"],
+  "SERVICE CENTER SOLO": ["TMM - AGUS YULIANTO","TMM - ARDA AFIF DARORI","YULIANTO"],
+  "SERVICE CENTER KEDIRI": ["IRFAN ASHARI","TMM - AHMAT IRFAN ASHARI","WAHYU SIROJUL MUNIR"],
+  "SERVICE CENTER YOGYAKARTA": ["IBNU SANTOSO","PURWANTORO","TMM - BAYU CAHYA HERLAMBANG","TMM - HERU WARDANA","TRIYADI"],
+  "SERVICE CENTER SEMARANG": ["ABDUL SYARIF HIDAYAT","LUTFI PAMUNGKAS YULIARDI"],
+  "SERVICE CENTER PURWOKERTO": ["CANDRA HARDIANTO","RIWAN AJI SETIONO","TMM - RASONO"],
+  "SERVICE CENTER BALI": ["DANIEL ANDRIAN HARTANTO","I KETUT SARWITA","I MADE AGUS SUARTANA","RAC - I KETUT DE ANGGA SANTIKA","RIKI FRANSINDO HENDRAWAN","FIRMAN ANGGORO SULAKSONO"],
+  "SERVICE CENTER MAKASSAR": ["ANDY","ILYAS HARIS","MUH AKBAR","TMM - DARWIS","TMM - JUNAEDI","TMM - USMAN SYAM"],
+  "SERVICE CENTER MANADO": ["TMM - DONNY KALIDE"],
+  "SERVICE CENTER BANJARMASIN": ["FADLI","LEO WALDY"],
+  "SERVICE CENTER SAMARINDA": ["ANWAR IDRIS","FADKURROHMAN","MOHAMMAD ZAINURI"],
+  "SERVICE CENTER PONTIANAK": ["SUPRIYANTO"],
+  "SERVICE CENTER PEKANBARU": ["BAITURRAHMAN","NOFRIYAN DI","RAHMAT HIDAYAT","SUHENDRI"],
+  "SERVICE CENTER MEDAN": ["BONI ARIF","BUDI ANDRIAN PURBA","MHD LIDRA HASRI"],
+  "SERVICE CENTER ACEH": ["FERI HIDAYAT","TMM - AULIA FURQAN"],
+  "SERVICE CENTER BATAM": ["MUHAMMAD RAFIQI","TMM - TRI KUNDARWAN"],
+  "SERVICE CENTER LAMPUNG": ["MERDI HADI SAPUTRA"],
+  "SERVICE CENTER PALEMBANG": ["FAISAL AGUSTAN","HERLAMBANG WIDIYANTO"]
 };
 
+// ── STATE ──
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8bmcN-xAHrpP24JIqaWmjVry_bYouCTb3l84qwBzNOKhHKGEnTctj9FhzaefejF_G/exec";
+const state = { photos: { masker: null, sepatu: null }, timestamp: null };
 
-/* =========================================================
-   TIMESTAMP
-========================================================= */
+// ── INIT DROPDOWN SC ──
+(function initSC() {
+  const sel = document.getElementById('sc');
+  Object.keys(SC_DATA).sort().forEach(sc => {
+    const opt = document.createElement('option');
+    opt.value = sc;
+    opt.textContent = sc;
+    sel.appendChild(opt);
+  });
+})();
 
+// ── SC CHANGE → UPDATE TEKNISI ──
+function onSCChange() {
+  const sc = document.getElementById('sc').value;
+  const selT = document.getElementById('teknisi');
+  selT.innerHTML = '';
+  if (!sc) {
+    selT.innerHTML = '<option value="">— Pilih service center dulu —</option>';
+  } else {
+    const opt0 = document.createElement('option');
+    opt0.value = ''; opt0.textContent = '— Pilih nama teknisi —';
+    selT.appendChild(opt0);
+    (SC_DATA[sc] || []).forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = name; opt.textContent = name;
+      selT.appendChild(opt);
+    });
+  }
+  checkReady();
+}
+
+// ── TIMESTAMP ──
+function getNow() {
+  const d = new Date();
+  const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const months = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
+  const hh = String(d.getHours()).padStart(2,'0');
+  const mm = String(d.getMinutes()).padStart(2,'0');
+  return {
+    display: `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} — ${hh}:${mm} WIB`,
+    compact: `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()} ${hh}:${mm} WIB`,
+    obj: d
+  };
+}
 function updateTimestamp() {
-
-  const now = new Date();
-
-  const options = {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
-  };
-
-  const timestamp =
-    now.toLocaleString(
-      "id-ID",
-      options
-    );
-
-  document.getElementById(
-    "timestamp"
-  ).textContent = timestamp;
-
+  const ts = getNow();
+  state.timestamp = ts;
+  document.getElementById('ts-text').textContent = ts.display;
 }
-
 updateTimestamp();
+setInterval(updateTimestamp, 30000);
 
+// ── FILE TRIGGER ──
+function triggerFile(id) { document.getElementById(id).click(); }
+// (fungsi di atas tetap ada sebagai fallback)
 
-/* =========================================================
-   OPEN PHOTO MODAL
-========================================================= */
-
-function openPhotoModal(type) {
-
-  selectedPhotoType = type;
-
-  const modal =
-    document.getElementById("photo-modal");
-
-  modal.classList.add("show");
-
-}
-
-
-/* =========================================================
-   CLOSE PHOTO MODAL
-========================================================= */
-
-function closePhotoModal() {
-
-  selectedPhotoType = null;
-
-  const modal =
-    document.getElementById("photo-modal");
-
-  modal.classList.remove("show");
-
-}
-
-
-/* =========================================================
-   CLOSE MODAL WHEN CLICK OUTSIDE
-========================================================= */
-
-function closePhotoModalOutside(event) {
-
-  if (
-    event.target.id === "photo-modal"
-  ) {
-
-    closePhotoModal();
-
-  }
-
-}
-
-
-/* =========================================================
-   CHOOSE CAMERA
-========================================================= */
-
-function chooseCamera() {
-
-  if (!selectedPhotoType) {
-    return;
-  }
-
-  const type =
-    selectedPhotoType;
-
-  closePhotoModal();
-
-
-  setTimeout(function() {
-
-    const input =
-      document.getElementById(
-        "file-" + type + "-camera"
-      );
-
-    if (input) {
-
-      input.value = "";
-
-      input.click();
-
-    }
-
-  }, 150);
-
-}
-
-
-/* =========================================================
-   CHOOSE UPLOAD
-========================================================= */
-
-function chooseUpload() {
-
-  if (!selectedPhotoType) {
-    return;
-  }
-
-  const type =
-    selectedPhotoType;
-
-  closePhotoModal();
-
-
-  setTimeout(function() {
-
-    const input =
-      document.getElementById(
-        "file-" + type + "-upload"
-      );
-
-    if (input) {
-
-      input.value = "";
-
-      input.click();
-
-    }
-
-  }, 150);
-
-}
-
-
-/* =========================================================
-   HANDLE PHOTO
-========================================================= */
-
+// ── PHOTO HANDLER ──
 function handlePhoto(input, type) {
-
-  if (
-    !input.files ||
-    !input.files[0]
-  ) {
-
-    return;
-
-  }
-
-
-  const file =
-    input.files[0];
-
-
-  if (
-    !file.type.startsWith("image/")
-  ) {
-
-    alert(
-      "File yang dipilih harus berupa gambar."
-    );
-
-    return;
-
-  }
-
-
-  const reader =
-    new FileReader();
-
-
-  reader.onload = function(event) {
-
-    const image =
-      new Image();
-
-
-    image.onload = function() {
-
-      photos[type] = image;
-
-      displayPhoto(
-        type,
-        image
-      );
-
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const img = new Image();
+    img.onload = () => {
+      state.photos[type] = img;
+      renderPhotoBox(type, e.target.result);
       updateChecklist();
-
-      updateResultCanvas();
-
+      checkReady();
     };
-
-
-    image.src =
-      event.target.result;
-
+    img.src = e.target.result;
   };
-
-
   reader.readAsDataURL(file);
-
 }
 
-
-/* =========================================================
-   DISPLAY PHOTO
-========================================================= */
-
-function displayPhoto(type, image) {
-
-  const box =
-    document.getElementById(
-      "box-" + type
-    );
-
-
-  box.classList.add(
-    "has-photo"
-  );
-
-
-  /*
-     Hapus preview lama
-  */
-
-  const oldPreview =
-    box.querySelector(
-      ".preview"
-    );
-
-  if (oldPreview) {
-
-    oldPreview.remove();
-
-  }
-
-
-  /*
-     Hapus badge lama
-  */
-
-  const oldBadge =
-    box.querySelector(
-      ".done-badge"
-    );
-
-  if (oldBadge) {
-
-    oldBadge.remove();
-
-  }
-
-
-  /*
-     Hapus retry lama
-  */
-
-  const oldRetry =
-    box.querySelector(
-      ".retry-btn"
-    );
-
-  if (oldRetry) {
-
-    oldRetry.remove();
-
-  }
-
-
-  /*
-     Buat preview
-  */
-
-  const preview =
-    document.createElement(
-      "img"
-    );
-
-  preview.className =
-    "preview";
-
-  preview.src =
-    image.src;
-
-
-  box.appendChild(
-    preview
-  );
-
-
-  /*
-     Badge
-  */
-
-  const badge =
-    document.createElement(
-      "div"
-    );
-
-  badge.className =
-    "done-badge";
-
-
-  badge.innerHTML = `
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <polyline points="20 6 9 17 4 12"/>
-    </svg>
+function renderPhotoBox(type, src) {
+  const box = document.getElementById('box-' + type);
+  box.classList.add('has-photo');
+  // Input file TIDAK dimasukkan ke dalam box — sudah ada di luar, dipicu via onclick box
+  box.innerHTML = `
+    <img class="preview" src="${src}" alt="Foto ${type}">
+    <div class="done-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="retry-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.7"/></svg> Ganti</div>
   `;
-
-
-  box.appendChild(
-    badge
-  );
-
-
-  /*
-     Retry
-  */
-
-  const retry =
-    document.createElement(
-      "button"
-    );
-
-  retry.type =
-    "button";
-
-  retry.className =
-    "retry-btn";
-
-  retry.innerHTML = `
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <polyline points="23 4 23 10 17 10"/>
-      <path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"/>
-    </svg>
-    Ganti
-  `;
-
-
-  retry.onclick =
-    function(event) {
-
-      event.stopPropagation();
-
-      openPhotoModal(
-        type
-      );
-
-    };
-
-
-  box.appendChild(
-    retry
-  );
-
-
-  /*
-     Sembunyikan icon dan label
-  */
-
-  const icon =
-    box.querySelector(
-      ".ph-icon"
-    );
-
-  const label =
-    box.querySelector(
-      ".ph-label"
-    );
-
-  const sub =
-    box.querySelector(
-      ".ph-sub"
-    );
-
-
-  if (icon) {
-
-    icon.style.display =
-      "none";
-
-  }
-
-  if (label) {
-
-    label.style.display =
-      "none";
-
-  }
-
-  if (sub) {
-
-    sub.style.display =
-      "none";
-
-  }
-
 }
-
-
-/* =========================================================
-   UPDATE CHECKLIST
-========================================================= */
 
 function updateChecklist() {
-
-  updateSingleChecklist(
-    "masker"
-  );
-
-  updateSingleChecklist(
-    "sepatu"
-  );
-
+  const okIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+  const waitIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>`;
+  const chkM = document.getElementById('chk-masker');
+  const chkS = document.getElementById('chk-sepatu');
+  if (state.photos.masker) { chkM.classList.add('ok'); chkM.innerHTML = okIcon + ' Foto masker ✓'; }
+  else { chkM.classList.remove('ok'); chkM.innerHTML = waitIcon + ' Foto masker belum diupload'; }
+  if (state.photos.sepatu) { chkS.classList.add('ok'); chkS.innerHTML = okIcon + ' Foto sepatu ✓'; }
+  else { chkS.classList.remove('ok'); chkS.innerHTML = waitIcon + ' Foto sepatu belum diupload'; }
 }
 
+// ── CHECK READY ──
+function checkReady() {
+  const sc = document.getElementById('sc').value.trim();
+  const tek = document.getElementById('teknisi').value.trim();
+  const lap = document.getElementById('laporan').value.trim();
+  const hasPhotos = state.photos.masker && state.photos.sepatu;
+  const ready = sc && tek && lap && hasPhotos;
 
-/* =========================================================
-   SINGLE CHECKLIST
-========================================================= */
+  // Progress
+  const p1 = sc && tek;
+  const p2 = p1 && lap;
+  const p3 = p2 && hasPhotos;
+  document.getElementById('prog-1').className = 'progress-step ' + (p1 ? 'done' : 'active');
+  document.getElementById('prog-2').className = 'progress-step ' + (p2 ? 'done' : (p1 ? 'active' : ''));
+  document.getElementById('prog-3').className = 'progress-step ' + (p3 ? 'done' : (p2 ? 'active' : ''));
 
-function updateSingleChecklist(type) {
+  const btn = document.getElementById('btn-download');
+  const hint = document.getElementById('hint-text');
+  const dlIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
 
-  const checklist =
-    document.getElementById(
-      "chk-" + type
-    );
-
-
-  if (!checklist) {
-    return;
-  }
-
-
-  if (photos[type]) {
-
-    checklist.classList.add(
-      "ok"
-    );
-
-
-    checklist.innerHTML = `
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <circle
-          cx="12"
-          cy="12"
-          r="10"
-        />
-        <polyline
-          points="16 9 10 15 7 12"
-        />
-      </svg>
-
-      Foto ${type === "masker" ? "masker" : "sepatu"} sudah diupload
-    `;
-
+  if (ready) {
+    btn.disabled = false;
+    btn.innerHTML = dlIcon + ' Download hasil foto';
+    hint.textContent = 'Simpan gambar lalu upload ke sistem teknisi';
+    generatePreview();
+    document.getElementById('card-preview').style.display = 'block';
   } else {
-
-    checklist.classList.remove(
-      "ok"
-    );
-
-
-    checklist.innerHTML = `
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <circle
-          cx="12"
-          cy="12"
-          r="10"
-        />
-        <polyline
-          points="12 8 12 12 14 14"
-        />
-      </svg>
-
-      Foto ${type === "masker" ? "masker" : "sepatu"} belum diupload
-    `;
-
+    btn.disabled = true;
+    btn.innerHTML = dlIcon + ' Lengkapi data untuk download';
+    const missing = [];
+    if (!sc) missing.push('service center');
+    if (!tek) missing.push('nama teknisi');
+    if (!lap) missing.push('nomor laporan');
+    if (!state.photos.masker) missing.push('foto masker');
+    if (!state.photos.sepatu) missing.push('foto sepatu');
+    hint.textContent = 'Masih kurang: ' + missing.join(', ');
   }
-
 }
 
+// ── CANVAS RENDER ──
+function renderToCanvas(canvas, W) {
+  const sc = document.getElementById('sc').value;
+  const tek = document.getElementById('teknisi').value;
+  const lap = document.getElementById('laporan').value;
+  const ts = state.timestamp;
+  const H = Math.round(W * 0.72);
+  const halfW = Math.floor(W / 2) - 3;
+  const photoH = H - Math.round(H * 0.22);
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
 
-/* =========================================================
-   UPDATE STATUS
-========================================================= */
+  ctx.fillStyle = '#f5f6f7';
+  ctx.fillRect(0, 0, W, H);
 
-function updateStatus() {
+  if (state.photos.masker) drawCropped(ctx, state.photos.masker, 0, 0, halfW, photoH);
+  if (state.photos.sepatu) drawCropped(ctx, state.photos.sepatu, halfW + 6, 0, halfW, photoH);
 
-  const maskerStatus =
-    document.getElementById(
-      "status-masker"
-    );
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(halfW, 0, 6, photoH);
 
-  const sepatuStatus =
-    document.getElementById(
-      "status-sepatu"
-    );
+  const lH = Math.round(H * 0.058);
+  const lF = Math.round(W * 0.022);
+  ctx.font = `500 ${lF}px -apple-system, sans-serif`;
 
+  ctx.fillStyle = 'rgba(0,0,0,0.58)';
+  ctx.fillRect(0, 0, halfW, lH + 4);
+  ctx.fillStyle = '#fff';
+  ctx.fillText('Masker terpasang  ✓', 10, lH - 3);
 
-  if (photos.masker) {
+  ctx.fillStyle = 'rgba(0,0,0,0.58)';
+  ctx.fillRect(halfW + 6, 0, halfW, lH + 4);
+  ctx.fillStyle = '#fff';
+  ctx.fillText('Sepatu pengganti  ✓', halfW + 16, lH - 3);
 
-    maskerStatus.classList.add(
-      "done"
-    );
+  // Info bar
+  const barY = photoH;
+  const barH = H - photoH;
+  ctx.fillStyle = '#1a3a5c';
+  ctx.fillRect(0, barY, W, barH);
 
-  } else {
+  const pad = Math.round(W * 0.022);
+  const row1Y = barY + Math.round(barH * 0.33);
+  const row2Y = barY + Math.round(barH * 0.68);
+  const f1 = Math.round(W * 0.026);
+  const f2 = Math.round(W * 0.021);
 
-    maskerStatus.classList.remove(
-      "done"
-    );
+  ctx.fillStyle = '#fff';
+  ctx.font = `600 ${f1}px -apple-system, sans-serif`;
+  ctx.fillText(lap, pad, row1Y);
+  const lapW = ctx.measureText(lap).width;
 
-  }
+  ctx.font = `400 ${f2}px -apple-system, sans-serif`;
+  ctx.fillStyle = 'rgba(255,255,255,0.5)';
+  const sep = '   |   ';
+  ctx.fillText(sep, pad + lapW, row1Y);
+  const sepW = ctx.measureText(sep).width;
 
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.fillText(sc, pad + lapW + sepW, row1Y);
 
-  if (photos.sepatu) {
+  ctx.fillStyle = 'rgba(255,255,255,0.75)';
+  ctx.font = `400 ${f2}px -apple-system, sans-serif`;
+  ctx.fillText(tek, pad, row2Y);
+  const tekW = ctx.measureText(tek).width;
+  ctx.fillStyle = 'rgba(255,255,255,0.45)';
+  ctx.fillText(sep, pad + tekW, row2Y);
+  ctx.fillStyle = 'rgba(255,255,255,0.65)';
+  ctx.fillText(ts ? ts.compact : '', pad + tekW + sepW, row2Y);
 
-    sepatuStatus.classList.add(
-      "done"
-    );
-
-  } else {
-
-    sepatuStatus.classList.remove(
-      "done"
-    );
-
-  }
-
+  const brand = 'APD Monitoring — After Sales';
+  ctx.font = `400 ${Math.round(W * 0.017)}px -apple-system, sans-serif`;
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  const bW = ctx.measureText(brand).width;
+  ctx.fillText(brand, W - bW - pad, row2Y);
 }
 
-
-/* =========================================================
-   UPDATE RESULT CANVAS
-========================================================= */
-
-function updateResultCanvas() {
-
-  updateStatus();
-
-
-  const canvas =
-    document.getElementById(
-      "result-canvas"
-    );
-
-  const ctx =
-    canvas.getContext(
-      "2d"
-    );
-
-
-  /*
-     Ukuran canvas
-  */
-
-  const width =
-    900;
-
-  const height =
-    600;
-
-
-  canvas.width =
-    width;
-
-  canvas.height =
-    height;
-
-
-  /*
-     Background
-  */
-
-  ctx.fillStyle =
-    "#ffffff";
-
-  ctx.fillRect(
-    0,
-    0,
-    width,
-    height
-  );
-
-
-  /*
-     Header
-  */
-
-  ctx.fillStyle =
-    "#12395b";
-
-  ctx.fillRect(
-    0,
-    0,
-    width,
-    100
-  );
-
-
-  ctx.fillStyle =
-    "#ffffff";
-
-  ctx.font =
-    "bold 28px Arial";
-
-  ctx.fillText(
-    "TECHNICIAN GROOMING",
-    40,
-    45
-  );
-
-
-  ctx.font =
-    "18px Arial";
-
-  ctx.fillText(
-    "Monitoring Documentation",
-    40,
-    75
-  );
-
-
-  /*
-     Nama
-  */
-
-  const name =
-    document.getElementById(
-      "technician-name"
-    ).value ||
-    "Nama Teknisi";
-
-
-  const branch =
-    document.getElementById(
-      "service-center"
-    ).value ||
-    "Service Center";
-
-
-  ctx.fillStyle =
-    "#374151";
-
-  ctx.font =
-    "bold 20px Arial";
-
-  ctx.fillText(
-    name,
-    40,
-    140
-  );
-
-
-  ctx.font =
-    "16px Arial";
-
-  ctx.fillStyle =
-    "#6b7280";
-
-  ctx.fillText(
-    branch,
-    40,
-    168
-  );
-
-
-  /*
-     Photo dimensions
-  */
-
-  const photoWidth =
-    390;
-
-  const photoHeight =
-    300;
-
-
-  /*
-     Masker
-  */
-
-  drawPhotoToCanvas(
-    ctx,
-    photos.masker,
-    40,
-    210,
-    photoWidth,
-    photoHeight,
-    "Foto Masker"
-  );
-
-
-  /*
-     Sepatu
-  */
-
-  drawPhotoToCanvas(
-    ctx,
-    photos.sepatu,
-    470,
-    210,
-    photoWidth,
-    photoHeight,
-    "Foto Sepatu"
-  );
-
+function drawCropped(ctx, img, x, y, w, h) {
+  const ar = img.width / img.height;
+  const bar = w / h;
+  let sx, sy, sw, sh;
+  if (ar > bar) { sh = img.height; sw = sh * bar; sx = (img.width - sw) / 2; sy = 0; }
+  else { sw = img.width; sh = sw / bar; sx = 0; sy = (img.height - sh) / 2; }
+  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
 }
 
-
-/* =========================================================
-   DRAW PHOTO
-========================================================= */
-
-function drawPhotoToCanvas(
-  ctx,
-  image,
-  x,
-  y,
-  width,
-  height,
-  label
-) {
-
-
-  ctx.fillStyle =
-    "#f5f6f7";
-
-  ctx.fillRect(
-    x,
-    y,
-    width,
-    height
-  );
-
-
-  if (!image) {
-
-    ctx.strokeStyle =
-      "#e1e4e8";
-
-    ctx.strokeRect(
-      x,
-      y,
-      width,
-      height
-    );
-
-
-    ctx.fillStyle =
-      "#9ca3af";
-
-    ctx.font =
-      "16px Arial";
-
-    ctx.textAlign =
-      "center";
-
-    ctx.fillText(
-      label + " belum tersedia",
-      x + width / 2,
-      y + height / 2
-    );
-
-    ctx.textAlign =
-      "left";
-
-    return;
-
-  }
-
-
-  /*
-     Maintain aspect ratio
-  */
-
-  const imageRatio =
-    image.width /
-    image.height;
-
-  const boxRatio =
-    width /
-    height;
-
-
-  let drawWidth;
-  let drawHeight;
-  let offsetX;
-  let offsetY;
-
-
-  if (imageRatio > boxRatio) {
-
-    drawHeight =
-      height;
-
-    drawWidth =
-      height *
-      imageRatio;
-
-    offsetX =
-      x +
-      (width - drawWidth) / 2;
-
-    offsetY =
-      y;
-
-  } else {
-
-    drawWidth =
-      width;
-
-    drawHeight =
-      width /
-      imageRatio;
-
-    offsetX =
-      x;
-
-    offsetY =
-      y +
-      (height - drawHeight) / 2;
-
-  }
-
-
-  ctx.save();
-
-  ctx.beginPath();
-
-  ctx.rect(
-    x,
-    y,
-    width,
-    height
-  );
-
-  ctx.clip();
-
-
-  ctx.drawImage(
-    image,
-    offsetX,
-    offsetY,
-    drawWidth,
-    drawHeight
-  );
-
-
-  ctx.restore();
-
-
-  /*
-     Border
-  */
-
-  ctx.strokeStyle =
-    "#22a06b";
-
-  ctx.lineWidth =
-    3;
-
-  ctx.strokeRect(
-    x,
-    y,
-    width,
-    height
-  );
-
-
-  /*
-     Label
-  */
-
-  ctx.fillStyle =
-    "rgba(0,0,0,0.6)";
-
-  ctx.fillRect(
-    x,
-    y + height - 38,
-    width,
-    38
-  );
-
-
-  ctx.fillStyle =
-    "#ffffff";
-
-  ctx.font =
-    "bold 15px Arial";
-
-  ctx.fillText(
-    label,
-    x + 12,
-    y + height - 14
-  );
-
+function generatePreview() {
+  renderToCanvas(document.getElementById('result-canvas'), 680);
 }
 
+// ── COMPRESS IMAGE untuk upload (maks ~300KB) ──
+function compressImage(canvas, maxSizeKB = 300) {
+  let quality = 0.85;
+  let dataUrl = canvas.toDataURL('image/jpeg', quality);
+  while (dataUrl.length * 0.75 > maxSizeKB * 1024 && quality > 0.2) {
+    quality -= 0.1;
+    dataUrl = canvas.toDataURL('image/jpeg', quality);
+  }
+  return dataUrl.split(',')[1]; // return base64 only (tanpa prefix)
+}
 
-/* =========================================================
-   UPDATE CANVAS WHEN INPUT CHANGES
-========================================================= */
+// ── KIRIM DATA + FOTO KE GOOGLE SHEETS / DRIVE ──
+async function sendToSheet(downloadTime) {
+  try {
+    // Buat canvas kecil untuk foto masker
+    const canvasMasker = document.createElement('canvas');
+    canvasMasker.width = 800; canvasMasker.height = 600;
+    const ctxM = canvasMasker.getContext('2d');
+    if (state.photos.masker) drawCropped(ctxM, state.photos.masker, 0, 0, 800, 600);
+    const fotoMaskerB64 = compressImage(canvasMasker);
 
-document
-  .getElementById(
-    "technician-name"
-  )
-  .addEventListener(
-    "input",
-    updateResultCanvas
-  );
+    // Buat canvas kecil untuk foto sepatu
+    const canvasSepatu = document.createElement('canvas');
+    canvasSepatu.width = 800; canvasSepatu.height = 600;
+    const ctxS = canvasSepatu.getContext('2d');
+    if (state.photos.sepatu) drawCropped(ctxS, state.photos.sepatu, 0, 0, 800, 600);
+    const fotoSepatuB64 = compressImage(canvasSepatu);
 
+    const payload = {
+      wo:          document.getElementById('laporan').value.trim(),
+      teknisi:     document.getElementById('teknisi').value,
+      sc:          document.getElementById('sc').value,
+      downloadTime: downloadTime,
+      fotoMasker:  fotoMaskerB64,
+      fotoSepatu:  fotoSepatuB64,
+    };
 
-document
-  .getElementById(
-    "service-center"
-  )
-  .addEventListener(
-    "input",
-    updateResultCanvas
-  );
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode:   'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.warn('Gagal kirim ke sheet:', err);
+  }
+}
 
-
-/* =========================================================
-   DOWNLOAD
-========================================================= */
-
+// ── DOWNLOAD ──
 function downloadResult() {
-
-  if (
-    !photos.masker ||
-    !photos.sepatu
-  ) {
-
-    alert(
-      "Silakan lengkapi Foto Masker dan Foto Sepatu terlebih dahulu."
-    );
-
-    return;
-
-  }
-
-
-  updateResultCanvas();
-
-
-  const canvas =
-    document.getElementById(
-      "result-canvas"
-    );
-
-
-  const link =
-    document.createElement(
-      "a"
-    );
-
-
-  const name =
-    document.getElementById(
-      "technician-name"
-    ).value
-    .trim()
-    .replace(
-      /\s+/g,
-      "_"
-    ) ||
-    "Technician";
-
-
-  link.download =
-    "Grooming_" +
-    name +
-    "_" +
-    Date.now() +
-    ".png";
-
-
-  link.href =
-    canvas.toDataURL(
-      "image/png"
-    );
-
-
-  link.click();
-
-}
-
-
-/* =========================================================
-   CHECK DOWNLOAD BUTTON
-========================================================= */
-
-function checkDownloadButton() {
-
-  const button =
-    document.getElementById(
-      "btn-download"
-    );
-
-
-  if (
-    photos.masker &&
-    photos.sepatu
-  ) {
-
-    button.disabled =
-      false;
-
-  } else {
-
-    button.disabled =
-      true;
-
-  }
-
-}
-
-
-/* =========================================================
-   MODIFY UPDATE CHECKLIST
-========================================================= */
-
-const originalUpdateChecklist =
-  updateChecklist;
-
-
-updateChecklist =
-  function() {
-
-    originalUpdateChecklist();
-
-    checkDownloadButton();
-
-  };
-
-
-/* =========================================================
-   INITIAL CANVAS
-========================================================= */
-
-updateResultCanvas();
-
-checkDownloadButton();
-
-
-/* =========================================================
-   PREVENT DOUBLE TAP ZOOM
-========================================================= */
-
-let lastTouchEnd =
-  0;
-
-
-document.addEventListener(
-  "touchend",
-  function(event) {
-
-    const now =
-      Date.now();
-
-    if (
-      now - lastTouchEnd <= 300
-    ) {
-
-      event.preventDefault();
-
-    }
-
-    lastTouchEnd =
-      now;
-
+  const lap = document.getElementById('laporan').value.trim();
+  const tek = document.getElementById('teknisi').value.replace(/\s+/g, '_');
+  const ts = state.timestamp;
+  const d = ts ? ts.obj : new Date();
+  const dateStr = `${d.getDate()}${d.getMonth()+1}${d.getFullYear()}`;
+  const hiddenCanvas = document.getElementById('hidden-canvas');
+  renderToCanvas(hiddenCanvas, 1200);
+  setTimeout(() => {
+    const link = document.createElement('a');
+    link.download = `APD_${lap}_${tek}_${dateStr}.jpg`;
+    link.href = hiddenCanvas.toDataURL('image/jpeg', 0.92);
+alert("KIRIM DATA KE GOOGLE SHEET");
+fetch(
+'https://script.google.com/macros/s/AKfycbyKLG7Q1JsdDj22fAuH88iLucYroI-6TD74085YiVgP4oHrpoVpacGGRbt_glAX6q4L/exec',
+{
+  method:'POST',
+  mode:'no-cors',
+  headers:{
+    'Content-Type':'application/json'
   },
-  false
-);
-
-
+  body:JSON.stringify({
+    wo:lap,
+    teknisi:document.getElementById('teknisi').value,
+    sc:document.getElementById('sc').value,
+    downloadTime:new Date().toLocaleString()
+  })
+});
+    link.click();
+  }, 50);
+}
 </script>
-
-
 </body>
-
 </html>
