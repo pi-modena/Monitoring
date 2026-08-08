@@ -1,27 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<title>Technician Grooming Monitoring</title>
+
+
 <style>
 
-.header { background: var(--navy); padding: 16px 20px 20px; }
-.header-inner { display: flex; align-items: center; gap: 12px; }
-.header-icon { width: 38px; height: 38px; background: rgba(255,255,255,0.12); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.header-icon svg { width: 20px; height: 20px; color: #fff; }
-.header h1 { font-size: 15px; font-weight: 600; color: #fff; line-height: 1.3; }
-.header p { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 1px; }
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-.progress-wrap { padding: 14px 20px 0; display: flex; gap: 5px; background: var(--navy); }
-.progress-step { flex: 1; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.2); transition: background 0.3s; }
-.progress-step.done { background: #fff; }
-.progress-step.active { background: #5ba3e0; }
+:root {
+  --navy: #12395b;
+  --navy-light: #1d527d;
+  --navy-pale: #eaf2f8;
 
-.main { padding: 16px 16px 48px; display: flex; flex-direction: column; gap: 12px; }
+  --green: #22a06b;
+  --green-pale: #e9f7f0;
 
-.card { background: #fff; border-radius: var(--radius-lg); border: 0.5px solid var(--gray-200); overflow: hidden; }
-.card-head { padding: 14px 16px 10px; display: flex; align-items: center; gap: 8px; border-bottom: 0.5px solid var(--gray-200); }
-.card-head svg { width: 16px; height: 16px; color: var(--gray-600); flex-shrink: 0; }
-.card-head span { font-size: 13px; font-weight: 500; color: var(--gray-600); }
-.card-body { padding: 14px 16px; }
+  --gray-100: #f5f6f7;
+  --gray-200: #e1e4e8;
+  --gray-400: #9ca3af;
+  --gray-600: #6b7280;
+  --gray-800: #374151;
 
-.field + .field { margin-top: 10px; }
-.field label { display: block; font-size: 12px; color: var(--gray-600); margin-bottom: 5px; font-weight: 500; }
+  --radius-sm: 7px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  background: #f7f8fa;
+  color: var(--gray-800);
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+  background: var(--navy);
+  padding: 16px 20px 20px;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-icon {
+  width: 38px;
+  height: 38px;
+  background: rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.header-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+}
+
+.header h1 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.header p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 1px;
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-wrap {
+  padding: 14px 20px 0;
+  display: flex;
+  gap: 5px;
+  background: var(--navy);
+}
+
+.progress-step {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.2);
+  transition: background 0.3s;
+}
+
+.progress-step.done {
+  background: #fff;
+}
+
+.progress-step.active {
+  background: #5ba3e0;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+  padding: 16px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  border: 0.5px solid var(--gray-200);
+  overflow: hidden;
+}
+
+.card-head {
+  padding: 14px 16px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 0.5px solid var(--gray-200);
+}
+
+.card-head svg {
+  width: 16px;
+  height: 16px;
+  color: var(--gray-600);
+  flex-shrink: 0;
+}
+
+.card-head span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-600);
+}
+
+.card-body {
+  padding: 14px 16px;
+}
+
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.field + .field {
+  margin-top: 10px;
+}
+
+.field label {
+  display: block;
+  font-size: 12px;
+  color: var(--gray-600);
+  margin-bottom: 5px;
+  font-weight: 500;
+}
 
 .field select,
 .field input[type="text"] {
@@ -55,6 +242,11 @@
   color: var(--gray-400);
 }
 
+
+/* =========================================================
+   TIMESTAMP
+========================================================= */
+
 .timestamp-pill {
   display: inline-flex;
   align-items: center;
@@ -71,6 +263,11 @@
   width: 13px;
   height: 13px;
 }
+
+
+/* =========================================================
+   PHOTO SECTION
+========================================================= */
 
 .photo-section-label {
   font-size: 12px;
@@ -96,11 +293,21 @@
   line-height: 1.5;
 }
 
+
+/* =========================================================
+   PHOTO GRID
+========================================================= */
+
 .photo-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
+
+
+/* =========================================================
+   PHOTO BOX
+========================================================= */
 
 .photo-box {
   border: 1.5px dashed var(--gray-200);
@@ -113,12 +320,17 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: border-color 0.2s, background 0.2s;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
   background: var(--gray-100);
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .photo-box:active {
   opacity: 0.85;
+  transform: scale(0.99);
 }
 
 .photo-box .ph-icon {
@@ -146,7 +358,10 @@
   opacity: 0.7;
 }
 
-/* input file diletakkan di luar photo-box, dipicu via JS */
+
+/* =========================================================
+   PHOTO HAS PHOTO
+========================================================= */
 
 .photo-box.has-photo {
   border-style: solid;
@@ -161,6 +376,11 @@
   position: absolute;
   inset: 0;
 }
+
+
+/* =========================================================
+   DONE BADGE
+========================================================= */
 
 .photo-box .done-badge {
   position: absolute;
@@ -182,25 +402,37 @@
   color: #fff;
 }
 
+
+/* =========================================================
+   RETRY BUTTON
+========================================================= */
+
 .photo-box .retry-btn {
   position: absolute;
   bottom: 7px;
   right: 7px;
   background: rgba(0,0,0,0.55);
   border-radius: 6px;
-  padding: 3px 7px;
+  padding: 5px 8px;
   font-size: 10px;
   color: #fff;
   display: flex;
   align-items: center;
   gap: 3px;
   z-index: 2;
+  border: none;
+  cursor: pointer;
 }
 
 .photo-box .retry-btn svg {
   width: 11px;
   height: 11px;
 }
+
+
+/* =========================================================
+   GUIDE
+========================================================= */
 
 .guide-box {
   display: flex;
@@ -222,6 +454,11 @@
   color: var(--gray-400);
   line-height: 1.6;
 }
+
+
+/* =========================================================
+   CHECKLIST
+========================================================= */
 
 .checklist {
   display: flex;
@@ -249,6 +486,11 @@
   flex-shrink: 0;
 }
 
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
 .preview-wrap {
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -259,6 +501,11 @@
   width: 100%;
   display: block;
 }
+
+
+/* =========================================================
+   STATUS
+========================================================= */
 
 .status-bar {
   display: flex;
@@ -288,6 +535,11 @@
   color: var(--green);
 }
 
+
+/* =========================================================
+   DOWNLOAD BUTTON
+========================================================= */
+
 .btn-download {
   width: 100%;
   background: var(--navy);
@@ -302,7 +554,9 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: background 0.15s, transform 0.1s;
+  transition:
+    background 0.15s,
+    transform 0.1s;
 }
 
 .btn-download svg {
@@ -329,56 +583,290 @@
   line-height: 1.5;
 }
 
+
+/* =========================================================
+   HIDDEN CANVAS
+========================================================= */
+
 #hidden-canvas {
   display: none;
 }
 
+
+/* =========================================================
+   PHOTO SOURCE MODAL
+========================================================= */
+
+.photo-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0,0,0,0.45);
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.photo-modal.show {
+  display: flex;
+}
+
+.photo-modal-content {
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
+  box-shadow: 0 -5px 25px rgba(0,0,0,0.18);
+}
+
+.photo-modal-title {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin-bottom: 14px;
+}
+
+.photo-source-btn {
+  width: 100%;
+  border: 0;
+  background: var(--gray-100);
+  color: var(--gray-800);
+  border-radius: var(--radius-md);
+  padding: 13px 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.photo-source-btn:active {
+  transform: scale(0.98);
+}
+
+.photo-cancel-btn {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--gray-400);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .photo-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .photo-box {
+    min-height: 150px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL SCREEN
+========================================================= */
+
+@media (max-width: 360px) {
+
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-box {
+    padding: 4px;
+  }
+
+}
+
 </style>
 
+</head>
 
-<!-- ========================================================= -->
-<!-- FOTO 1 — MASKER -->
-<!-- ========================================================= -->
 
-<div class="photo-section-label">
-  <div class="dot"></div>
-  Foto 1 — Masker terpasang
-</div>
+<body>
 
-<!-- Kamera -->
-<input
-  type="file"
-  id="file-masker-camera"
-  accept="image/*"
-  capture="environment"
-  style="display:none"
-  onchange="handlePhoto(this,'masker')"
->
 
-<!-- Upload / Galeri -->
-<input
-  type="file"
-  id="file-masker-upload"
-  accept="image/*"
-  style="display:none"
-  onchange="handlePhoto(this,'masker')"
->
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
-<div class="photo-grid" style="margin-bottom:16px">
+<div class="header">
 
-  <div
-    class="photo-box"
-    id="box-masker"
-    onclick="choosePhoto('masker')"
-  >
+  <div class="header-inner">
 
-    <div class="ph-icon">
+    <div class="header-icon">
 
       <svg
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="1.5"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+
+    </div>
+
+    <div>
+
+      <h1>
+        Technician Grooming Monitoring
+      </h1>
+
+      <p>
+        Dokumentasi penggunaan grooming kit
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     PROGRESS
+========================================================= -->
+
+<div class="progress-wrap">
+
+  <div class="progress-step done"></div>
+
+  <div class="progress-step active"></div>
+
+  <div class="progress-step"></div>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<div class="main">
+
+
+  <!-- =======================================================
+       DATA TEKNISI
+  ======================================================== -->
+
+  <div class="card">
+
+    <div class="card-head">
+
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+
+      <span>
+        Data Teknisi
+      </span>
+
+    </div>
+
+
+    <div class="card-body">
+
+      <div class="field">
+
+        <label>
+          Nama Teknisi
+        </label>
+
+        <input
+          type="text"
+          id="technician-name"
+          placeholder="Masukkan nama teknisi"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Service Center
+        </label>
+
+        <input
+          type="text"
+          id="service-center"
+          placeholder="Masukkan nama service center"
+        >
+
+      </div>
+
+
+      <div class="timestamp-pill">
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+
+        <span id="timestamp">
+          -
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       FOTO GROOMING
+  ======================================================== -->
+
+  <div class="card">
+
+    <div class="card-head">
+
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
         stroke-linecap="round"
         stroke-linejoin="round"
       >
@@ -393,91 +881,542 @@
 
       </svg>
 
+      <span>
+        Dokumentasi Grooming
+      </span>
+
     </div>
 
-    <div class="ph-label">
-      Ketuk untuk foto
-    </div>
 
-    <div class="ph-sub">
-      Kamera / Upload
+    <div class="card-body">
+
+
+      <div class="photo-note">
+
+        Silakan ambil foto menggunakan kamera atau pilih foto yang sudah tersimpan di perangkat.
+
+      </div>
+
+
+      <!-- ===================================================
+           FOTO 1
+      ==================================================== -->
+
+      <div class="photo-section-label">
+
+        <div class="dot"></div>
+
+        Foto 1 — Masker terpasang
+
+      </div>
+
+
+      <!-- CAMERA MASKER -->
+
+      <input
+        type="file"
+        id="file-masker-camera"
+        accept="image/*"
+        capture="environment"
+        style="display:none"
+        onchange="handlePhoto(this,'masker')"
+      >
+
+
+      <!-- UPLOAD MASKER -->
+
+      <input
+        type="file"
+        id="file-masker-upload"
+        accept="image/*"
+        style="display:none"
+        onchange="handlePhoto(this,'masker')"
+      >
+
+
+      <div
+        class="photo-grid"
+        style="margin-bottom:16px"
+      >
+
+
+        <div
+          class="photo-box"
+          id="box-masker"
+          onclick="openPhotoModal('masker')"
+        >
+
+          <div class="ph-icon">
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+
+              <circle
+                cx="12"
+                cy="13"
+                r="4"
+              />
+
+            </svg>
+
+          </div>
+
+
+          <div class="ph-label">
+
+            Ketuk untuk foto
+
+          </div>
+
+
+          <div class="ph-sub">
+
+            Kamera / Upload
+
+          </div>
+
+        </div>
+
+
+        <div class="guide-box">
+
+          <div class="guide-title">
+
+            Panduan:
+
+          </div>
+
+          <div class="guide-item">
+
+            ✓ Wajah terlihat jelas
+
+          </div>
+
+          <div class="guide-item">
+
+            ✓ Masker menutupi hidung &amp; mulut
+
+          </div>
+
+          <div class="guide-item">
+
+            ✓ Pencahayaan cukup
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           FOTO 2
+      ==================================================== -->
+
+      <div class="photo-section-label">
+
+        <div class="dot"></div>
+
+        Foto 2 — Sepatu pengganti
+
+      </div>
+
+
+      <!-- CAMERA SEPATU -->
+
+      <input
+        type="file"
+        id="file-sepatu-camera"
+        accept="image/*"
+        capture="environment"
+        style="display:none"
+        onchange="handlePhoto(this,'sepatu')"
+      >
+
+
+      <!-- UPLOAD SEPATU -->
+
+      <input
+        type="file"
+        id="file-sepatu-upload"
+        accept="image/*"
+        style="display:none"
+        onchange="handlePhoto(this,'sepatu')"
+      >
+
+
+      <div class="photo-grid">
+
+
+        <div
+          class="photo-box"
+          id="box-sepatu"
+          onclick="openPhotoModal('sepatu')"
+        >
+
+          <div class="ph-icon">
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+
+              <circle
+                cx="12"
+                cy="13"
+                r="4"
+              />
+
+            </svg>
+
+          </div>
+
+
+          <div class="ph-label">
+
+            Ketuk untuk foto
+
+          </div>
+
+
+          <div class="ph-sub">
+
+            Kamera / Upload
+
+          </div>
+
+        </div>
+
+
+        <div class="guide-box">
+
+          <div class="guide-title">
+
+            Panduan:
+
+          </div>
+
+          <div class="guide-item">
+
+            ✓ Kedua sepatu terlihat
+
+          </div>
+
+          <div class="guide-item">
+
+            ✓ Foto dari depan/atas
+
+          </div>
+
+          <div class="guide-item">
+
+            ✓ Sepatu bersih terpasang
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           CHECKLIST
+      ==================================================== -->
+
+      <div class="checklist">
+
+
+        <div
+          class="check-item"
+          id="chk-masker"
+        >
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+            />
+
+            <polyline points="12 8 12 12 14 14"/>
+
+          </svg>
+
+          Foto masker belum diupload
+
+        </div>
+
+
+        <div
+          class="check-item"
+          id="chk-sepatu"
+        >
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+            />
+
+            <polyline points="12 8 12 12 14 14"/>
+
+          </svg>
+
+          Foto sepatu belum diupload
+
+        </div>
+
+
+      </div>
+
     </div>
 
   </div>
 
 
-  <div class="guide-box">
+  <!-- =======================================================
+       PREVIEW
+  ======================================================== -->
 
-    <div class="guide-title">
-      Panduan:
-    </div>
+  <div class="card">
 
-    <div class="guide-item">
-      ✓ Wajah terlihat jelas
-    </div>
-
-    <div class="guide-item">
-      ✓ Masker menutupi hidung &amp; mulut
-    </div>
-
-    <div class="guide-item">
-      ✓ Pencahayaan cukup
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ========================================================= -->
-<!-- FOTO 2 — SEPATU -->
-<!-- ========================================================= -->
-
-<div class="photo-section-label">
-
-  <div class="dot"></div>
-
-  Foto 2 — Sepatu pengganti
-
-</div>
-
-
-<!-- Kamera -->
-<input
-  type="file"
-  id="file-sepatu-camera"
-  accept="image/*"
-  capture="environment"
-  style="display:none"
-  onchange="handlePhoto(this,'sepatu')"
->
-
-
-<!-- Upload / Galeri -->
-<input
-  type="file"
-  id="file-sepatu-upload"
-  accept="image/*"
-  style="display:none"
-  onchange="handlePhoto(this,'sepatu')"
->
-
-
-<div class="photo-grid">
-
-  <div
-    class="photo-box"
-    id="box-sepatu"
-    onclick="choosePhoto('sepatu')"
-  >
-
-    <div class="ph-icon">
+    <div class="card-head">
 
       <svg
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="1.5"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+
+        <rect
+          x="3"
+          y="3"
+          width="18"
+          height="18"
+          rx="2"
+          ry="2"
+        />
+
+        <circle
+          cx="8.5"
+          cy="8.5"
+          r="1.5"
+        />
+
+        <polyline
+          points="21 15 16 10 5 21"
+        />
+
+      </svg>
+
+      <span>
+        Preview Dokumentasi
+      </span>
+
+    </div>
+
+
+    <div class="card-body">
+
+      <div class="preview-wrap">
+
+        <canvas id="result-canvas"></canvas>
+
+      </div>
+
+
+      <div class="status-bar">
+
+        <div
+          class="status-chip"
+          id="status-masker"
+        >
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+            />
+
+            <polyline points="16 9 10 15 7 12"/>
+
+          </svg>
+
+          Masker
+
+        </div>
+
+
+        <div
+          class="status-chip"
+          id="status-sepatu"
+        >
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+            />
+
+            <polyline points="16 9 10 15 7 12"/>
+
+          </svg>
+
+          Sepatu
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       DOWNLOAD
+  ======================================================== -->
+
+  <div>
+
+    <button
+      class="btn-download"
+      id="btn-download"
+      type="button"
+      disabled
+      onclick="downloadResult()"
+    >
+
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+
+        <polyline points="7 10 12 15 17 10"/>
+
+        <line
+          x1="12"
+          y1="15"
+          x2="12"
+          y2="3"
+        />
+
+      </svg>
+
+      Download Dokumentasi
+
+    </button>
+
+
+    <div class="hint-text">
+
+      Lengkapi kedua foto sebelum mengunduh dokumentasi.
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     PHOTO SOURCE MODAL
+========================================================= -->
+
+<div
+  class="photo-modal"
+  id="photo-modal"
+  onclick="closePhotoModalOutside(event)"
+>
+
+
+  <div
+    class="photo-modal-content"
+    onclick="event.stopPropagation()"
+  >
+
+
+    <div class="photo-modal-title">
+
+      Pilih Sumber Foto
+
+    </div>
+
+
+    <!-- CAMERA -->
+
+    <button
+      type="button"
+      class="photo-source-btn"
+      onclick="chooseCamera()"
+    >
+
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
         stroke-linecap="round"
         stroke-linejoin="round"
       >
@@ -492,136 +1431,1219 @@
 
       </svg>
 
-    </div>
+      Ambil Foto dengan Kamera
 
-    <div class="ph-label">
-      Ketuk untuk foto
-    </div>
-
-    <div class="ph-sub">
-      Kamera / Upload
-    </div>
-
-  </div>
+    </button>
 
 
-  <div class="guide-box">
+    <!-- UPLOAD -->
 
-    <div class="guide-title">
-      Panduan:
-    </div>
+    <button
+      type="button"
+      class="photo-source-btn"
+      onclick="chooseUpload()"
+    >
 
-    <div class="guide-item">
-      ✓ Kedua sepatu terlihat
-    </div>
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
 
-    <div class="guide-item">
-      ✓ Foto dari depan/atas
-    </div>
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
 
-    <div class="guide-item">
-      ✓ Sepatu bersih terpasang
-    </div>
+        <polyline points="17 8 12 3 7 8"/>
+
+        <line
+          x1="12"
+          y1="3"
+          x2="12"
+          y2="15"
+        />
+
+      </svg>
+
+      Upload dari Galeri
+
+    </button>
+
+
+    <!-- CANCEL -->
+
+    <button
+      type="button"
+      class="photo-cancel-btn"
+      onclick="closePhotoModal()"
+    >
+
+      Batal
+
+    </button>
+
 
   </div>
 
 </div>
 
 
-<!-- ========================================================= -->
-<!-- CHECKLIST -->
-<!-- ========================================================= -->
+<!-- =========================================================
+     HIDDEN CANVAS
+========================================================= -->
 
-<div class="checklist">
-
-  <div
-    class="check-item"
-    id="chk-masker"
-  >
-
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-
-      <circle
-        cx="12"
-        cy="12"
-        r="10"
-      />
-
-      <polyline points="12 8 12 12 14 14"/>
-
-    </svg>
-
-    Foto masker belum diupload
-
-  </div>
+<canvas id="hidden-canvas"></canvas>
 
 
-  <div
-    class="check-item"
-    id="chk-sepatu"
-  >
-
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-
-      <circle
-        cx="12"
-        cy="12"
-        r="10"
-      />
-
-      <polyline points="12 8 12 12 14 14"/>
-
-    </svg>
-
-    Foto sepatu belum diupload
-
-  </div>
-
-</div>
-
-
-<!-- ========================================================= -->
-<!-- JAVASCRIPT PILIH KAMERA / UPLOAD -->
-<!-- ========================================================= -->
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
 <script>
 
-function choosePhoto(type) {
 
-  const pilihan = confirm(
-    "Pilih sumber foto:\n\n" +
-    "OK = Kamera\n" +
-    "Cancel = Upload / Galeri"
-  );
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
 
-  if (pilihan) {
+let selectedPhotoType = null;
 
-    document
-      .getElementById("file-" + type + "-camera")
-      .click();
+let photos = {
+  masker: null,
+  sepatu: null
+};
 
-  } else {
 
-    document
-      .getElementById("file-" + type + "-upload")
-      .click();
+/* =========================================================
+   TIMESTAMP
+========================================================= */
+
+function updateTimestamp() {
+
+  const now = new Date();
+
+  const options = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  };
+
+  const timestamp =
+    now.toLocaleString(
+      "id-ID",
+      options
+    );
+
+  document.getElementById(
+    "timestamp"
+  ).textContent = timestamp;
+
+}
+
+updateTimestamp();
+
+
+/* =========================================================
+   OPEN PHOTO MODAL
+========================================================= */
+
+function openPhotoModal(type) {
+
+  selectedPhotoType = type;
+
+  const modal =
+    document.getElementById("photo-modal");
+
+  modal.classList.add("show");
+
+}
+
+
+/* =========================================================
+   CLOSE PHOTO MODAL
+========================================================= */
+
+function closePhotoModal() {
+
+  selectedPhotoType = null;
+
+  const modal =
+    document.getElementById("photo-modal");
+
+  modal.classList.remove("show");
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL WHEN CLICK OUTSIDE
+========================================================= */
+
+function closePhotoModalOutside(event) {
+
+  if (
+    event.target.id === "photo-modal"
+  ) {
+
+    closePhotoModal();
 
   }
 
 }
 
+
+/* =========================================================
+   CHOOSE CAMERA
+========================================================= */
+
+function chooseCamera() {
+
+  if (!selectedPhotoType) {
+    return;
+  }
+
+  const type =
+    selectedPhotoType;
+
+  closePhotoModal();
+
+
+  setTimeout(function() {
+
+    const input =
+      document.getElementById(
+        "file-" + type + "-camera"
+      );
+
+    if (input) {
+
+      input.value = "";
+
+      input.click();
+
+    }
+
+  }, 150);
+
+}
+
+
+/* =========================================================
+   CHOOSE UPLOAD
+========================================================= */
+
+function chooseUpload() {
+
+  if (!selectedPhotoType) {
+    return;
+  }
+
+  const type =
+    selectedPhotoType;
+
+  closePhotoModal();
+
+
+  setTimeout(function() {
+
+    const input =
+      document.getElementById(
+        "file-" + type + "-upload"
+      );
+
+    if (input) {
+
+      input.value = "";
+
+      input.click();
+
+    }
+
+  }, 150);
+
+}
+
+
+/* =========================================================
+   HANDLE PHOTO
+========================================================= */
+
+function handlePhoto(input, type) {
+
+  if (
+    !input.files ||
+    !input.files[0]
+  ) {
+
+    return;
+
+  }
+
+
+  const file =
+    input.files[0];
+
+
+  if (
+    !file.type.startsWith("image/")
+  ) {
+
+    alert(
+      "File yang dipilih harus berupa gambar."
+    );
+
+    return;
+
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload = function(event) {
+
+    const image =
+      new Image();
+
+
+    image.onload = function() {
+
+      photos[type] = image;
+
+      displayPhoto(
+        type,
+        image
+      );
+
+      updateChecklist();
+
+      updateResultCanvas();
+
+    };
+
+
+    image.src =
+      event.target.result;
+
+  };
+
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* =========================================================
+   DISPLAY PHOTO
+========================================================= */
+
+function displayPhoto(type, image) {
+
+  const box =
+    document.getElementById(
+      "box-" + type
+    );
+
+
+  box.classList.add(
+    "has-photo"
+  );
+
+
+  /*
+     Hapus preview lama
+  */
+
+  const oldPreview =
+    box.querySelector(
+      ".preview"
+    );
+
+  if (oldPreview) {
+
+    oldPreview.remove();
+
+  }
+
+
+  /*
+     Hapus badge lama
+  */
+
+  const oldBadge =
+    box.querySelector(
+      ".done-badge"
+    );
+
+  if (oldBadge) {
+
+    oldBadge.remove();
+
+  }
+
+
+  /*
+     Hapus retry lama
+  */
+
+  const oldRetry =
+    box.querySelector(
+      ".retry-btn"
+    );
+
+  if (oldRetry) {
+
+    oldRetry.remove();
+
+  }
+
+
+  /*
+     Buat preview
+  */
+
+  const preview =
+    document.createElement(
+      "img"
+    );
+
+  preview.className =
+    "preview";
+
+  preview.src =
+    image.src;
+
+
+  box.appendChild(
+    preview
+  );
+
+
+  /*
+     Badge
+  */
+
+  const badge =
+    document.createElement(
+      "div"
+    );
+
+  badge.className =
+    "done-badge";
+
+
+  badge.innerHTML = `
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+  `;
+
+
+  box.appendChild(
+    badge
+  );
+
+
+  /*
+     Retry
+  */
+
+  const retry =
+    document.createElement(
+      "button"
+    );
+
+  retry.type =
+    "button";
+
+  retry.className =
+    "retry-btn";
+
+  retry.innerHTML = `
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <polyline points="23 4 23 10 17 10"/>
+      <path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"/>
+    </svg>
+    Ganti
+  `;
+
+
+  retry.onclick =
+    function(event) {
+
+      event.stopPropagation();
+
+      openPhotoModal(
+        type
+      );
+
+    };
+
+
+  box.appendChild(
+    retry
+  );
+
+
+  /*
+     Sembunyikan icon dan label
+  */
+
+  const icon =
+    box.querySelector(
+      ".ph-icon"
+    );
+
+  const label =
+    box.querySelector(
+      ".ph-label"
+    );
+
+  const sub =
+    box.querySelector(
+      ".ph-sub"
+    );
+
+
+  if (icon) {
+
+    icon.style.display =
+      "none";
+
+  }
+
+  if (label) {
+
+    label.style.display =
+      "none";
+
+  }
+
+  if (sub) {
+
+    sub.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   UPDATE CHECKLIST
+========================================================= */
+
+function updateChecklist() {
+
+  updateSingleChecklist(
+    "masker"
+  );
+
+  updateSingleChecklist(
+    "sepatu"
+  );
+
+}
+
+
+/* =========================================================
+   SINGLE CHECKLIST
+========================================================= */
+
+function updateSingleChecklist(type) {
+
+  const checklist =
+    document.getElementById(
+      "chk-" + type
+    );
+
+
+  if (!checklist) {
+    return;
+  }
+
+
+  if (photos[type]) {
+
+    checklist.classList.add(
+      "ok"
+    );
+
+
+    checklist.innerHTML = `
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+        />
+        <polyline
+          points="16 9 10 15 7 12"
+        />
+      </svg>
+
+      Foto ${type === "masker" ? "masker" : "sepatu"} sudah diupload
+    `;
+
+  } else {
+
+    checklist.classList.remove(
+      "ok"
+    );
+
+
+    checklist.innerHTML = `
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+        />
+        <polyline
+          points="12 8 12 12 14 14"
+        />
+      </svg>
+
+      Foto ${type === "masker" ? "masker" : "sepatu"} belum diupload
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   UPDATE STATUS
+========================================================= */
+
+function updateStatus() {
+
+  const maskerStatus =
+    document.getElementById(
+      "status-masker"
+    );
+
+  const sepatuStatus =
+    document.getElementById(
+      "status-sepatu"
+    );
+
+
+  if (photos.masker) {
+
+    maskerStatus.classList.add(
+      "done"
+    );
+
+  } else {
+
+    maskerStatus.classList.remove(
+      "done"
+    );
+
+  }
+
+
+  if (photos.sepatu) {
+
+    sepatuStatus.classList.add(
+      "done"
+    );
+
+  } else {
+
+    sepatuStatus.classList.remove(
+      "done"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   UPDATE RESULT CANVAS
+========================================================= */
+
+function updateResultCanvas() {
+
+  updateStatus();
+
+
+  const canvas =
+    document.getElementById(
+      "result-canvas"
+    );
+
+  const ctx =
+    canvas.getContext(
+      "2d"
+    );
+
+
+  /*
+     Ukuran canvas
+  */
+
+  const width =
+    900;
+
+  const height =
+    600;
+
+
+  canvas.width =
+    width;
+
+  canvas.height =
+    height;
+
+
+  /*
+     Background
+  */
+
+  ctx.fillStyle =
+    "#ffffff";
+
+  ctx.fillRect(
+    0,
+    0,
+    width,
+    height
+  );
+
+
+  /*
+     Header
+  */
+
+  ctx.fillStyle =
+    "#12395b";
+
+  ctx.fillRect(
+    0,
+    0,
+    width,
+    100
+  );
+
+
+  ctx.fillStyle =
+    "#ffffff";
+
+  ctx.font =
+    "bold 28px Arial";
+
+  ctx.fillText(
+    "TECHNICIAN GROOMING",
+    40,
+    45
+  );
+
+
+  ctx.font =
+    "18px Arial";
+
+  ctx.fillText(
+    "Monitoring Documentation",
+    40,
+    75
+  );
+
+
+  /*
+     Nama
+  */
+
+  const name =
+    document.getElementById(
+      "technician-name"
+    ).value ||
+    "Nama Teknisi";
+
+
+  const branch =
+    document.getElementById(
+      "service-center"
+    ).value ||
+    "Service Center";
+
+
+  ctx.fillStyle =
+    "#374151";
+
+  ctx.font =
+    "bold 20px Arial";
+
+  ctx.fillText(
+    name,
+    40,
+    140
+  );
+
+
+  ctx.font =
+    "16px Arial";
+
+  ctx.fillStyle =
+    "#6b7280";
+
+  ctx.fillText(
+    branch,
+    40,
+    168
+  );
+
+
+  /*
+     Photo dimensions
+  */
+
+  const photoWidth =
+    390;
+
+  const photoHeight =
+    300;
+
+
+  /*
+     Masker
+  */
+
+  drawPhotoToCanvas(
+    ctx,
+    photos.masker,
+    40,
+    210,
+    photoWidth,
+    photoHeight,
+    "Foto Masker"
+  );
+
+
+  /*
+     Sepatu
+  */
+
+  drawPhotoToCanvas(
+    ctx,
+    photos.sepatu,
+    470,
+    210,
+    photoWidth,
+    photoHeight,
+    "Foto Sepatu"
+  );
+
+}
+
+
+/* =========================================================
+   DRAW PHOTO
+========================================================= */
+
+function drawPhotoToCanvas(
+  ctx,
+  image,
+  x,
+  y,
+  width,
+  height,
+  label
+) {
+
+
+  ctx.fillStyle =
+    "#f5f6f7";
+
+  ctx.fillRect(
+    x,
+    y,
+    width,
+    height
+  );
+
+
+  if (!image) {
+
+    ctx.strokeStyle =
+      "#e1e4e8";
+
+    ctx.strokeRect(
+      x,
+      y,
+      width,
+      height
+    );
+
+
+    ctx.fillStyle =
+      "#9ca3af";
+
+    ctx.font =
+      "16px Arial";
+
+    ctx.textAlign =
+      "center";
+
+    ctx.fillText(
+      label + " belum tersedia",
+      x + width / 2,
+      y + height / 2
+    );
+
+    ctx.textAlign =
+      "left";
+
+    return;
+
+  }
+
+
+  /*
+     Maintain aspect ratio
+  */
+
+  const imageRatio =
+    image.width /
+    image.height;
+
+  const boxRatio =
+    width /
+    height;
+
+
+  let drawWidth;
+  let drawHeight;
+  let offsetX;
+  let offsetY;
+
+
+  if (imageRatio > boxRatio) {
+
+    drawHeight =
+      height;
+
+    drawWidth =
+      height *
+      imageRatio;
+
+    offsetX =
+      x +
+      (width - drawWidth) / 2;
+
+    offsetY =
+      y;
+
+  } else {
+
+    drawWidth =
+      width;
+
+    drawHeight =
+      width /
+      imageRatio;
+
+    offsetX =
+      x;
+
+    offsetY =
+      y +
+      (height - drawHeight) / 2;
+
+  }
+
+
+  ctx.save();
+
+  ctx.beginPath();
+
+  ctx.rect(
+    x,
+    y,
+    width,
+    height
+  );
+
+  ctx.clip();
+
+
+  ctx.drawImage(
+    image,
+    offsetX,
+    offsetY,
+    drawWidth,
+    drawHeight
+  );
+
+
+  ctx.restore();
+
+
+  /*
+     Border
+  */
+
+  ctx.strokeStyle =
+    "#22a06b";
+
+  ctx.lineWidth =
+    3;
+
+  ctx.strokeRect(
+    x,
+    y,
+    width,
+    height
+  );
+
+
+  /*
+     Label
+  */
+
+  ctx.fillStyle =
+    "rgba(0,0,0,0.6)";
+
+  ctx.fillRect(
+    x,
+    y + height - 38,
+    width,
+    38
+  );
+
+
+  ctx.fillStyle =
+    "#ffffff";
+
+  ctx.font =
+    "bold 15px Arial";
+
+  ctx.fillText(
+    label,
+    x + 12,
+    y + height - 14
+  );
+
+}
+
+
+/* =========================================================
+   UPDATE CANVAS WHEN INPUT CHANGES
+========================================================= */
+
+document
+  .getElementById(
+    "technician-name"
+  )
+  .addEventListener(
+    "input",
+    updateResultCanvas
+  );
+
+
+document
+  .getElementById(
+    "service-center"
+  )
+  .addEventListener(
+    "input",
+    updateResultCanvas
+  );
+
+
+/* =========================================================
+   DOWNLOAD
+========================================================= */
+
+function downloadResult() {
+
+  if (
+    !photos.masker ||
+    !photos.sepatu
+  ) {
+
+    alert(
+      "Silakan lengkapi Foto Masker dan Foto Sepatu terlebih dahulu."
+    );
+
+    return;
+
+  }
+
+
+  updateResultCanvas();
+
+
+  const canvas =
+    document.getElementById(
+      "result-canvas"
+    );
+
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+
+  const name =
+    document.getElementById(
+      "technician-name"
+    ).value
+    .trim()
+    .replace(
+      /\s+/g,
+      "_"
+    ) ||
+    "Technician";
+
+
+  link.download =
+    "Grooming_" +
+    name +
+    "_" +
+    Date.now() +
+    ".png";
+
+
+  link.href =
+    canvas.toDataURL(
+      "image/png"
+    );
+
+
+  link.click();
+
+}
+
+
+/* =========================================================
+   CHECK DOWNLOAD BUTTON
+========================================================= */
+
+function checkDownloadButton() {
+
+  const button =
+    document.getElementById(
+      "btn-download"
+    );
+
+
+  if (
+    photos.masker &&
+    photos.sepatu
+  ) {
+
+    button.disabled =
+      false;
+
+  } else {
+
+    button.disabled =
+      true;
+
+  }
+
+}
+
+
+/* =========================================================
+   MODIFY UPDATE CHECKLIST
+========================================================= */
+
+const originalUpdateChecklist =
+  updateChecklist;
+
+
+updateChecklist =
+  function() {
+
+    originalUpdateChecklist();
+
+    checkDownloadButton();
+
+  };
+
+
+/* =========================================================
+   INITIAL CANVAS
+========================================================= */
+
+updateResultCanvas();
+
+checkDownloadButton();
+
+
+/* =========================================================
+   PREVENT DOUBLE TAP ZOOM
+========================================================= */
+
+let lastTouchEnd =
+  0;
+
+
+document.addEventListener(
+  "touchend",
+  function(event) {
+
+    const now =
+      Date.now();
+
+    if (
+      now - lastTouchEnd <= 300
+    ) {
+
+      event.preventDefault();
+
+    }
+
+    lastTouchEnd =
+      now;
+
+  },
+  false
+);
+
+
 </script>
+
+
+</body>
+
+</html>
