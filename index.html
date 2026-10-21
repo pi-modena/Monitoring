@@ -2,42 +2,34 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Monitoring APD Teknisi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cek Grooming Teknisi</title>
 <style>
   :root {
-    --navy: #1a3a5c;
-    --navy-light: #254e7a;
-    --navy-pale: #e8eef5;
-    --green: #2e7d5e;
-    --green-pale: #e6f4ef;
-    --amber: #b45309;
-    --amber-pale: #fef3c7;
-    --gray-100: #f5f6f7;
-    --gray-200: #e9eaec;
-    --gray-400: #9ca3af;
-    --gray-600: #4b5563;
-    --gray-800: #1f2937;
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
+    --navy: #1a3a5c; --navy-light: #254e7a; --navy-pale: #e8eef5;
+    --green: #2e7d5e; --green-pale: #e6f4ef;
+    --red: #b42318; --red-pale: #fdecea;
+    --amber: #b45309; --amber-pale: #fef3c7;
+    --gray-100: #f5f6f7; --gray-200: #e9eaec; --gray-400: #9ca3af; --gray-600: #4b5563; --gray-800: #1f2937;
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gray-100); color: var(--gray-800); min-height: 100vh; }
 
   .header { background: var(--navy); padding: 16px 20px 20px; }
-  .header-inner { display: flex; align-items: center; gap: 12px; }
+  .header-inner { display: flex; align-items: center; gap: 12px; max-width: 560px; margin: 0 auto; }
   .header-icon { width: 38px; height: 38px; background: rgba(255,255,255,0.12); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .header-icon svg { width: 20px; height: 20px; color: #fff; }
   .header h1 { font-size: 15px; font-weight: 600; color: #fff; line-height: 1.3; }
-  .header p { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 1px; }
+  .header p { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 1px; }
 
-  .progress-wrap { padding: 14px 20px 0; display: flex; gap: 5px; background: var(--navy); }
+  .progress-wrap { padding: 14px 20px 0; background: var(--navy); }
+  .progress-inner { display: flex; gap: 5px; max-width: 560px; margin: 0 auto; }
   .progress-step { flex: 1; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.2); transition: background 0.3s; }
   .progress-step.done { background: #fff; }
   .progress-step.active { background: #5ba3e0; }
 
-  .main { padding: 16px 16px 48px; display: flex; flex-direction: column; gap: 12px; }
+  .main { padding: 16px 16px 48px; display: flex; flex-direction: column; gap: 12px; max-width: 560px; margin: 0 auto; }
 
   .card { background: #fff; border-radius: var(--radius-lg); border: 0.5px solid var(--gray-200); overflow: hidden; }
   .card-head { padding: 14px 16px 10px; display: flex; align-items: center; gap: 8px; border-bottom: 0.5px solid var(--gray-200); }
@@ -47,57 +39,59 @@
 
   .field + .field { margin-top: 10px; }
   .field label { display: block; font-size: 12px; color: var(--gray-600); margin-bottom: 5px; font-weight: 500; }
-  .field select, .field input[type="text"] { width: 100%; padding: 10px 12px; font-size: 14px; border: 0.5px solid var(--gray-200); border-radius: var(--radius-sm); background: var(--gray-100); color: var(--gray-800); appearance: none; -webkit-appearance: none; outline: none; transition: border-color 0.15s; }
-  .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
-  .field select:focus, .field input[type="text"]:focus { border-color: var(--navy); background: #fff; }
-  .field input[type="text"]::placeholder { color: var(--gray-400); }
+  .field select { width: 100%; padding: 10px 32px 10px 12px; font-size: 14px; border: 0.5px solid var(--gray-200); border-radius: var(--radius-sm); background: var(--gray-100); color: var(--gray-800); appearance: none; -webkit-appearance: none; outline: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+  .field select:focus { border-color: var(--navy); background-color: #fff; }
 
-  .timestamp-pill { display: inline-flex; align-items: center; gap: 5px; background: var(--navy-pale); color: var(--navy); font-size: 12px; padding: 4px 10px; border-radius: 20px; margin-top: 10px; }
-  .timestamp-pill svg { width: 13px; height: 13px; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .pill { display: inline-flex; align-items: center; gap: 5px; background: var(--navy-pale); color: var(--navy); font-size: 12px; padding: 4px 10px; border-radius: 20px; }
+  .pill svg { width: 13px; height: 13px; }
+  .pill.warn { background: var(--amber-pale); color: var(--amber); }
 
-  .photo-section-label { font-size: 12px; font-weight: 500; color: var(--gray-600); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-  .photo-section-label .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--navy); }
-  .photo-note { font-size: 11px; color: var(--gray-400); margin-bottom: 12px; line-height: 1.5; }
+  .note { font-size: 12px; color: var(--gray-600); margin-bottom: 12px; line-height: 1.5; }
+  .photo-label { font-size: 12px; font-weight: 500; color: var(--gray-600); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .photo-label .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--navy); }
+  .photo-label .tag { font-size: 10px; font-weight: 600; padding: 1px 7px; border-radius: 10px; }
+  .tag.req { background: var(--navy-pale); color: var(--navy); }
+  .tag.opt { background: var(--gray-200); color: var(--gray-600); }
 
   .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .photo-box { border: 1.5px dashed var(--gray-200); border-radius: var(--radius-md); min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden; transition: border-color 0.2s, background 0.2s; background: var(--gray-100); }
-  .photo-box:active { opacity: 0.85; }
-  .photo-box .ph-icon { color: var(--gray-400); margin-bottom: 6px; }
-  .photo-box .ph-icon svg { width: 28px; height: 28px; }
-  .photo-box .ph-label { font-size: 11px; color: var(--gray-400); text-align: center; padding: 0 8px; line-height: 1.4; }
-  .photo-box .ph-sub { font-size: 10px; color: var(--gray-400); margin-top: 3px; opacity: 0.7; }
-  /* input file diletakkan di luar photo-box, dipicu via JS */
+  .photo-box { border: 1.5px dashed var(--gray-200); border-radius: var(--radius-md); min-height: 170px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden; background: var(--gray-100); }
+  .photo-box .ph-icon svg { width: 28px; height: 28px; color: var(--gray-400); }
+  .photo-box .ph-label { font-size: 11px; color: var(--gray-600); text-align: center; margin-top: 6px; }
   .photo-box.has-photo { border-style: solid; border-color: var(--green); background: #fff; }
-  .photo-box img.preview { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-  .photo-box .done-badge { position: absolute; top: 7px; right: 7px; width: 22px; height: 22px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; }
-  .photo-box .done-badge svg { width: 12px; height: 12px; color: #fff; }
-  .photo-box .retry-btn { position: absolute; bottom: 7px; right: 7px; background: rgba(0,0,0,0.55); border-radius: 6px; padding: 3px 7px; font-size: 10px; color: #fff; display: flex; align-items: center; gap: 3px; z-index: 2; }
-  .photo-box .retry-btn svg { width: 11px; height: 11px; }
+  .photo-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+  .photo-box .badge { position: absolute; top: 7px; right: 7px; width: 22px; height: 22px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; }
+  .photo-box .badge svg { width: 12px; height: 12px; color: #fff; }
+  .photo-box .act { position: absolute; bottom: 7px; right: 7px; background: rgba(0,0,0,0.6); border-radius: 6px; padding: 3px 8px; font-size: 10px; color: #fff; z-index: 2; }
+  .guide { display: flex; flex-direction: column; justify-content: center; padding: 6px 2px; gap: 3px; }
+  .guide .t { font-size: 12px; color: var(--gray-600); font-weight: 500; margin-bottom: 3px; }
+  .guide .i { font-size: 11px; color: var(--gray-600); line-height: 1.55; }
+  .photo-err { font-size: 11px; color: var(--red); margin-top: 6px; display: none; }
 
-  .guide-box { display: flex; flex-direction: column; justify-content: center; padding: 8px 4px; gap: 4px; }
-  .guide-box .guide-title { font-size: 12px; color: var(--gray-600); font-weight: 500; margin-bottom: 4px; }
-  .guide-box .guide-item { font-size: 11px; color: var(--gray-400); line-height: 1.6; }
+  .check-list { display: flex; flex-direction: column; }
+  .check-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid var(--gray-200); }
+  .check-row:last-child { border-bottom: none; }
+  .check-row .txt b { display: block; font-size: 13px; font-weight: 500; }
+  .check-row .txt small { font-size: 11px; color: var(--gray-600); }
+  .yn { display: flex; gap: 4px; flex-shrink: 0; }
+  .yn button { min-width: 52px; padding: 8px 10px; font-size: 12px; font-weight: 600; border-radius: var(--radius-sm); border: 0.5px solid var(--gray-200); background: var(--gray-100); color: var(--gray-600); cursor: pointer; }
+  .yn button.on-y { background: var(--green-pale); border-color: var(--green); color: var(--green); }
+  .yn button.on-n { background: var(--red-pale); border-color: var(--red); color: var(--red); }
 
-  .checklist { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
-  .check-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--gray-400); transition: color 0.2s; }
-  .check-item.ok { color: var(--green); }
-  .check-item svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .btn { width: 100%; background: var(--navy); color: #fff; border: none; border-radius: var(--radius-md); padding: 14px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .btn svg { width: 18px; height: 18px; }
+  .btn:disabled { background: var(--gray-200); color: var(--gray-400); cursor: not-allowed; }
+  .hint { text-align: center; font-size: 11px; color: var(--gray-600); margin-top: 6px; line-height: 1.5; }
 
-  .preview-wrap { border-radius: var(--radius-md); overflow: hidden; border: 0.5px solid var(--gray-200); }
-  #result-canvas { width: 100%; display: block; }
-
-  .status-bar { display: flex; gap: 6px; margin-top: 10px; }
-  .status-chip { flex: 1; padding: 7px 8px; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; }
-  .status-chip svg { width: 13px; height: 13px; flex-shrink: 0; }
-  .status-chip.done { background: var(--green-pale); color: var(--green); }
-
-  .btn-download { width: 100%; background: var(--navy); color: #fff; border: none; border-radius: var(--radius-md); padding: 14px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.15s, transform 0.1s; }
-  .btn-download svg { width: 18px; height: 18px; }
-  .btn-download:disabled { background: var(--gray-200); color: var(--gray-400); cursor: not-allowed; }
-  .btn-download:not(:disabled):active { transform: scale(0.98); background: var(--navy-light); }
-  .hint-text { text-align: center; font-size: 11px; color: var(--gray-400); margin-top: 6px; line-height: 1.5; }
-
-  #hidden-canvas { display: none; }
+  .result { border-radius: var(--radius-lg); padding: 18px 16px; display: none; }
+  .result.ok { background: var(--green-pale); color: var(--green); display: block; }
+  .result.err { background: var(--red-pale); color: var(--red); display: block; }
+  .result b { display: block; font-size: 15px; margin-bottom: 4px; }
+  .result p { font-size: 13px; line-height: 1.5; color: var(--gray-800); }
+  .result code { font-size: 12px; background: rgba(255,255,255,0.7); padding: 1px 6px; border-radius: 4px; }
+  .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
@@ -105,482 +99,365 @@
 <div class="header">
   <div class="header-inner">
     <div class="header-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     </div>
     <div>
-      <h1>Monitoring APD Teknisi</h1>
-      <p>Kit masker &amp; sepatu pengganti</p>
+      <h1>Cek Grooming Teknisi</h1>
+      <p>Laporan mingguan · setiap Senin sebelum kunjungan pertama</p>
     </div>
   </div>
 </div>
-<div class="progress-wrap">
+<div class="progress-wrap"><div class="progress-inner">
   <div class="progress-step active" id="prog-1"></div>
   <div class="progress-step" id="prog-2"></div>
   <div class="progress-step" id="prog-3"></div>
-</div>
+</div></div>
 
-<div class="main">
+<div class="main" id="form-area">
 
-  <!-- DATA KUNJUNGAN -->
+  <!-- 1. DATA TEKNISI -->
   <div class="card">
     <div class="card-head">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      <span>Data kunjungan</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span>1. Data teknisi</span>
     </div>
     <div class="card-body">
       <div class="field">
         <label for="sc">Service center</label>
-        <select id="sc" onchange="onSCChange()">
-          <option value="">— Pilih service center —</option>
-        </select>
+        <select id="sc" onchange="onSCChange()"><option value="">— Pilih service center —</option></select>
       </div>
       <div class="field">
         <label for="teknisi">Nama teknisi</label>
-        <select id="teknisi" onchange="checkReady()">
-          <option value="">— Pilih service center dulu —</option>
-        </select>
+        <select id="teknisi" onchange="refresh()"><option value="">— Pilih service center dulu —</option></select>
       </div>
-      <div class="field">
-        <label for="laporan">Nomor laporan</label>
-        <input type="text" id="laporan" placeholder="Contoh: WO-2025-001234" maxlength="30" autocomplete="off" oninput="checkReady()" />
-      </div>
-      <div class="timestamp-pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span id="ts-text">Memuat waktu...</span>
+      <div class="pill-row">
+        <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="ts-text">Memuat waktu...</span></span>
+        <span class="pill" id="week-pill">Minggu —</span>
       </div>
     </div>
   </div>
 
-  <!-- UPLOAD FOTO -->
+  <!-- 2. FOTO -->
   <div class="card">
     <div class="card-head">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-      <span>Foto APD sebelum masuk</span>
+      <span>2. Foto penampilan</span>
     </div>
     <div class="card-body">
-      <p class="photo-note">Ambil foto sebelum memasuki rumah konsumen. Pastikan masker sudah terpasang dan sepatu pengganti sudah dipakai.</p>
+      <p class="note">Ambil foto langsung dari kamera (bisa dibantu rekan atau di depan cermin). Foto lama dari galeri tidak diterima.</p>
 
-      <div class="photo-section-label"><div class="dot"></div>Foto 1 — Masker terpasang</div>
-      <input type="file" id="file-masker" accept="image/*" style="display:none" onchange="handlePhoto(this,'masker')">
-      <div class="photo-grid" style="margin-bottom:16px">
-        <div class="photo-box" id="box-masker" onclick="document.getElementById('file-masker').click()">
-          <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-          <div class="ph-label">Ketuk untuk foto</div>
-          <div class="ph-sub">Kamera atau galeri</div>
-        </div>
-        <div class="guide-box">
-          <div class="guide-title">Panduan:</div>
-          <div class="guide-item">✓ Wajah terlihat jelas</div>
-          <div class="guide-item">✓ Masker menutupi hidung &amp; mulut</div>
-          <div class="guide-item">✓ Pencahayaan cukup</div>
-        </div>
-      </div>
-
-      <div class="photo-section-label"><div class="dot"></div>Foto 2 — Sepatu pengganti</div>
-      <input type="file" id="file-sepatu" accept="image/*" style="display:none" onchange="handlePhoto(this,'sepatu')">
+      <div class="photo-label"><div class="dot"></div>Foto 1 — Badan penuh tampak depan <span class="tag req">WAJIB</span></div>
+      <input type="file" id="file-1" accept="image/*" capture="environment" style="display:none" onchange="handlePhoto(this,1)">
       <div class="photo-grid">
-        <div class="photo-box" id="box-sepatu" onclick="document.getElementById('file-sepatu').click()">
+        <div class="photo-box" id="box-1" onclick="document.getElementById('file-1').click()">
           <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
           <div class="ph-label">Ketuk untuk foto</div>
-          <div class="ph-sub">Kamera atau galeri</div>
         </div>
-        <div class="guide-box">
-          <div class="guide-title">Panduan:</div>
-          <div class="guide-item">✓ Kedua sepatu terlihat</div>
-          <div class="guide-item">✓ Foto dari depan/atas</div>
-          <div class="guide-item">✓ Sepatu bersih terpasang</div>
+        <div class="guide">
+          <div class="t">Harus terlihat:</div>
+          <div class="i">✓ Kepala sampai kaki</div>
+          <div class="i">✓ Seragam &amp; logo MODENA</div>
+          <div class="i">✓ Celana kerja</div>
         </div>
       </div>
+      <div class="photo-err" id="err-1"></div>
 
-      <div class="checklist">
-        <div class="check-item" id="chk-masker">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
-          Foto masker belum diupload
+      <div class="photo-label" style="margin-top:16px"><div class="dot"></div>Foto 2 — Wajah close-up <span class="tag opt">OPSIONAL</span></div>
+      <input type="file" id="file-2" accept="image/*" capture="user" style="display:none" onchange="handlePhoto(this,2)">
+      <div class="photo-grid">
+        <div class="photo-box" id="box-2" onclick="document.getElementById('file-2').click()">
+          <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+          <div class="ph-label">Ketuk untuk foto</div>
         </div>
-        <div class="check-item" id="chk-sepatu">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
-          Foto sepatu belum diupload
+        <div class="guide">
+          <div class="t">Harus terlihat:</div>
+          <div class="i">✓ Rambut rapi</div>
+          <div class="i">✓ Kumis / jenggot rapi</div>
+          <div class="i">✓ Pencahayaan cukup</div>
         </div>
       </div>
+      <div class="photo-err" id="err-2"></div>
     </div>
   </div>
 
-  <!-- PREVIEW -->
-  <div class="card" id="card-preview" style="display:none">
+  <!-- 3. CHECKLIST -->
+  <div class="card">
     <div class="card-head">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      <span>Preview hasil gambar</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <span>3. Cek mandiri (jawab jujur)</span>
     </div>
     <div class="card-body">
-      <div class="preview-wrap"><canvas id="result-canvas"></canvas></div>
-      <div class="status-bar">
-        <div class="status-chip done">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          2 foto lengkap
-        </div>
-        <div class="status-chip done">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Timestamp otomatis
-        </div>
-      </div>
+      <div class="check-list" id="check-list"></div>
     </div>
   </div>
 
-  <!-- DOWNLOAD -->
-  <button class="btn-download" id="btn-download" disabled onclick="downloadResult()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    Lengkapi data untuk download
-  </button>
-  <p class="hint-text" id="hint-text">Isi semua data &amp; upload 2 foto untuk mengaktifkan download</p>
-
+  <button class="btn" id="btn-submit" disabled onclick="submitReport()">Lengkapi data untuk kirim</button>
+  <p class="hint" id="hint">Isi data teknisi, Foto 1, dan 4 item cek mandiri</p>
 </div>
 
-<canvas id="hidden-canvas"></canvas>
+<div class="main" style="padding-top:0">
+  <div class="result" id="result"></div>
+</div>
+
+<canvas id="work-canvas" style="display:none"></canvas>
 
 <script>
-// ── DATA SERVICE CENTER & TEKNISI ──
-const SC_DATA = {
-  "SERVICE CENTER SURABAYA": ["BUDIONO","DADAD TRI PURWOKO","DARWIYANTO","M. SOLIKHUDIN SALAM","TMM - DADAD TRI PURWOKO","TMM - MISDIANTO","WAHYU BAGUS PRASONGKO","ERFAN YULIANTO"],
-  "SERVICE CENTER MSC SURABAYA GWALK": ["TECHNICIAN (MSC SURABAYA GWALK)"],
-  "SERVICE CENTER MSC SURABAYA MAYJEND SUNGKONO": ["WAHYU BAGUS PRASONGKO SBY MAYJEND SUNGKONO"],
-  "SERVICE CENTER JAKARTA 1": ["ANDRI DIAPRAMA","BUDI SETIAWAN","EKA SASMITA","MARDANI FAJRIN","MUSTAFA ZAENUDIN BASRI","RAHMAT PERMANA","REZA BACHTIYAR","TAUFIK HIDAYAT","TMM - AZI ULULAZMI","TMM - NASRUDIN","TMM - WISNU UTOMO","WAGINO","WISNU UTOMO"],
-  "SERVICE CENTER JAKARTA 2": ["BUDI SETIAWAN","EKA SASMITA","RAHMAT PERMANA","AAN SUGIANTO","AGUNG INDRA SETIAWAN","AGUS SETIAWAN","AHMAD RIZALDI","ARIP WIBOWO","EKA TASWAYA","FAJAR AGUNG AHIRUDIN","FHADLIEYAN SAH","FIRMANSYAH","ISWANDI","KOSASIH","RISMAU L TISNA","TAUFIK HIDAYAT 2","TMM - HERO SRI ADJI","TMM - MEGA ARIF TRIYANA","TMM - WAHYU WIDODO","TOTO","WIDY AGUSTIAN PUTRA","YOGA DWI WIBAWA","TMM - TEGUH HARYANTO"],
-  "SERVICE CENTER JAKARTA 3": ["BUDI SETIAWAN","EKA SASMITA","RAHMAT PERMANA","ARIP WIBOWO","AKHIRUDIN","ANDHIKA ABDIEL","DERA SANTOSO","FERDIAN","KURNIA HANDOYO","M. YOGI YANTO","MEYDI KARAMOY","TAUFIK HIDAYAT 3","TMM - DIAN HENDRA PUTRA","TMM - WAWAN","TRESNO PANCA","YUSUF HIDAYAT","DIAN HENDRA PUTRA"],
-  "SERVICE CENTER JAKARTA 4 JATAKE": ["RAHMAT PERMANA"],
-  "SERVICE CENTER MSC SURYO": ["AGUS MSC SURYO","FHADLE MSC SURYO","ISWANDI MSC SURYO"],
-  "SERVICE CENTER MSC KEMANG": ["TMM BAGAS GREENLAKE","TEKNISI VIP KEMANG HERY W","TMM - HERO TEK INSTALL","TMM - MEGA TEK INSTALL","TMM - RIO TEK INSTALL","TMM - FIRMANSYAH"],
-  "SERVICE CENTER MSC GREENLAKE": ["JAMRONI GREENLAKE","JULIANTO GREENLAKE","TMM BAGAS GREENLAKE"],
-  "SERVICE CENTER MSC BOGOR": ["ASEP NURDIN MSC BOGOR","HERMANTO MSC BOGOR","TAUFIK HIDAYAT BGR","TEGUH HARTONO MSC BOGOR"],
-  "SERVICE CENTER BANDUNG": ["ARIF RAHMAN","DENNY SABANY","GILANG FAJAR SAPUTRA","JAJANG NUROHMAN","TMM - ARIEF NOOR HIDAYAT","TMM - BUDHY SYAHBUDIN","YADI SUPRIYADI"],
-  "SERVICE CENTER MSC KBP BANDUNG": ["GILANG FAJAR SAPUTRA"],
-  "SERVICE CENTER MALANG": ["LUKMAN HAKIM","MAHNUN ARIF"],
-  "SERVICE CENTER SOLO": ["TMM - AGUS YULIANTO","TMM - ARDA AFIF DARORI","YULIANTO"],
-  "SERVICE CENTER KEDIRI": ["IRFAN ASHARI","TMM - AHMAT IRFAN ASHARI","WAHYU SIROJUL MUNIR"],
-  "SERVICE CENTER YOGYAKARTA": ["IBNU SANTOSO","PURWANTORO","TMM - BAYU CAHYA HERLAMBANG","TMM - HERU WARDANA","TRIYADI"],
-  "SERVICE CENTER SEMARANG": ["ABDUL SYARIF HIDAYAT","LUTFI PAMUNGKAS YULIARDI"],
-  "SERVICE CENTER PURWOKERTO": ["CANDRA HARDIANTO","RIWAN AJI SETIONO","TMM - RASONO"],
-  "SERVICE CENTER BALI": ["DANIEL ANDRIAN HARTANTO","I KETUT SARWITA","I MADE AGUS SUARTANA","RAC - I KETUT DE ANGGA SANTIKA","RIKI FRANSINDO HENDRAWAN","FIRMAN ANGGORO SULAKSONO"],
-  "SERVICE CENTER MAKASSAR": ["ANDY","ILYAS HARIS","MUH AKBAR","TMM - DARWIS","TMM - JUNAEDI","TMM - USMAN SYAM"],
-  "SERVICE CENTER MANADO": ["TMM - DONNY KALIDE"],
-  "SERVICE CENTER BANJARMASIN": ["FADLI","LEO WALDY"],
-  "SERVICE CENTER SAMARINDA": ["ANWAR IDRIS","FADKURROHMAN","MOHAMMAD ZAINURI"],
-  "SERVICE CENTER PONTIANAK": ["SUPRIYANTO"],
-  "SERVICE CENTER PEKANBARU": ["BAITURRAHMAN","NOFRIYAN DI","RAHMAT HIDAYAT","SUHENDRI"],
-  "SERVICE CENTER MEDAN": ["BONI ARIF","BUDI ANDRIAN PURBA","MHD LIDRA HASRI"],
-  "SERVICE CENTER ACEH": ["FERI HIDAYAT","TMM - AULIA FURQAN"],
-  "SERVICE CENTER BATAM": ["MUHAMMAD RAFIQI","TMM - TRI KUNDARWAN"],
-  "SERVICE CENTER LAMPUNG": ["MERDI HADI SAPUTRA"],
-  "SERVICE CENTER PALEMBANG": ["FAISAL AGUSTAN","HERLAMBANG WIDIYANTO"]
+// ══════════════════════════════════════════════════════════════
+// KONFIGURASI — ganti SCRIPT_URL dengan URL Web App Apps Script
+// (Deploy > Manage deployments > Web app URL, berakhiran /exec)
+// ══════════════════════════════════════════════════════════════
+const CONFIG = {
+  SCRIPT_URL: "https://script.google.com/macros/s/AKfycbypTfgBfk4dSbs8XhYI9gaXEdpGdhzXRO58p00phlIk0HW-D7HZxIGj2tAVEdDVcz1D/exec",
+  MAX_PHOTO_AGE_MIN: 30,     // foto lebih lama dari ini dianggap dari galeri → ditolak
+  PHOTO_MAX_SIDE: 1280,      // resolusi maksimum sisi terpanjang (px)
+  PHOTO_MAX_KB: 350          // target ukuran per foto setelah kompres
 };
 
-// ── STATE ──
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzgLBdQC0tvbsk5nxlJYXCIUUqQaCyYtfsHUBN0ClZmrBEqvcCAMmXehVcVto8NTZj3/exec";
-const state = { photos: { masker: null, sepatu: null }, timestamp: null };
+// Item grooming (harus sama dengan ITEMS di Apps Script)
+const ITEMS = [
+  { key: "seragam", label: "Seragam",  desc: "Seragam resmi MODENA, bersih, tidak kusut/pudar" },
+  { key: "celana",  label: "Celana",   desc: "Celana kerja sesuai standar, bersih" },
+  { key: "rambut",  label: "Rambut",   desc: "Pendek/rapi, bersih" },
+  { key: "wajah",   label: "Wajah",    desc: "Kumis dan jenggot dicukur/dirapikan" }
+];
 
-// ── INIT DROPDOWN SC ──
-(function initSC() {
-  const sel = document.getElementById('sc');
-  Object.keys(SC_DATA).sort().forEach(sc => {
-    const opt = document.createElement('option');
-    opt.value = sc;
-    opt.textContent = sc;
-    sel.appendChild(opt);
+// Daftar SC & teknisi dimuat dari sheet Master_Teknisi (hanya yang Aktif = Ya).
+let SC_DATA = {};
+
+// ── STATE ──
+const state = { photos: { 1: null, 2: null }, answers: {}, sending: false };
+
+// ── INIT ──
+(function init() {
+  loadMaster();
+  const list = document.getElementById('check-list');
+  ITEMS.forEach(it => {
+    const row = document.createElement('div');
+    row.className = 'check-row';
+    row.innerHTML = `<div class="txt"><b>${it.label}</b><small>${it.desc}</small></div>
+      <div class="yn"><button type="button" data-k="${it.key}" data-v="Ya">Ya</button><button type="button" data-k="${it.key}" data-v="Tidak">Tidak</button></div>`;
+    list.appendChild(row);
   });
+  list.addEventListener('click', e => {
+    const b = e.target.closest('button[data-k]');
+    if (!b) return;
+    state.answers[b.dataset.k] = b.dataset.v;
+    b.parentElement.querySelectorAll('button').forEach(x => x.className = '');
+    b.className = b.dataset.v === 'Ya' ? 'on-y' : 'on-n';
+    refresh();
+  });
+  tick(); setInterval(tick, 30000);
+  refresh();
 })();
 
-// ── SC CHANGE → UPDATE TEKNISI ──
+
+// ── MUAT MASTER TEKNISI (dari Apps Script) ──
+const MASTER_CACHE_KEY = 'grooming_master_v2';
+async function loadMaster() {
+  const sel = document.getElementById('sc');
+  sel.disabled = true;
+  sel.innerHTML = '<option value="">Memuat daftar service center...</option>';
+  let data = null;
+  try {
+    const res = await fetch(CONFIG.SCRIPT_URL + '?action=master');
+    const j = await res.json();
+    if (j.ok && j.data) {
+      data = j.data;
+      try { localStorage.setItem(MASTER_CACHE_KEY, JSON.stringify(data)); } catch (e) {}
+    }
+  } catch (e) {
+    // Sinyal buruk: pakai daftar terakhir yang tersimpan di HP ini (server tetap memvalidasi saat kirim)
+    try { data = JSON.parse(localStorage.getItem(MASTER_CACHE_KEY) || 'null'); } catch (e2) {}
+  }
+  if (!data || !Object.keys(data).length) {
+    sel.innerHTML = '<option value="">Gagal memuat daftar</option>';
+    showResult(false, 'Daftar teknisi belum bisa dimuat', 'Periksa sinyal lalu <a href="#" onclick="location.reload();return false">muat ulang halaman</a>. Jika tetap gagal, hubungi admin After Sales.');
+    return;
+  }
+  SC_DATA = data;
+  sel.innerHTML = '<option value="">— Pilih service center —</option>';
+  Object.keys(SC_DATA).sort().forEach(sc => sel.add(new Option(sc, sc)));
+  sel.disabled = false;
+  document.getElementById('result').className = 'result';
+}
+
 function onSCChange() {
   const sc = document.getElementById('sc').value;
   const selT = document.getElementById('teknisi');
   selT.innerHTML = '';
-  if (!sc) {
-    selT.innerHTML = '<option value="">— Pilih service center dulu —</option>';
-  } else {
-    const opt0 = document.createElement('option');
-    opt0.value = ''; opt0.textContent = '— Pilih nama teknisi —';
-    selT.appendChild(opt0);
-    (SC_DATA[sc] || []).forEach(name => {
-      const opt = document.createElement('option');
-      opt.value = name; opt.textContent = name;
-      selT.appendChild(opt);
-    });
-  }
-  checkReady();
+  selT.add(new Option(sc ? '— Pilih nama teknisi —' : '— Pilih service center dulu —', ''));
+  // value = ID_Teknisi (kunci unik); teks = nama. Nama kembar di SC yang sama diberi ID agar bisa dibedakan.
+  const list = SC_DATA[sc] || [];
+  const count = {};
+  list.forEach(t => count[t.name] = (count[t.name] || 0) + 1);
+  list.forEach(t => selT.add(new Option(count[t.name] > 1 ? `${t.name} (${t.id})` : t.name, t.id)));
+  refresh();
 }
 
-// ── TIMESTAMP ──
-function getNow() {
-  const d = new Date();
+// ── WAKTU & MINGGU (tampilan saja; server menghitung ulang) ──
+function isoWeek(d) {
+  const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  const day = t.getUTCDay() || 7;
+  t.setUTCDate(t.getUTCDate() + 4 - day);
+  const y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+  const w = Math.ceil(((t - y0) / 86400000 + 1) / 7);
+  return `${t.getUTCFullYear()}-W${String(w).padStart(2, '0')}`;
+}
+function fmtNow(d) {
   const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-  const months = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
-  const hh = String(d.getHours()).padStart(2,'0');
-  const mm = String(d.getMinutes()).padStart(2,'0');
-  return {
-    display: `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} — ${hh}:${mm} WIB`,
-    compact: `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()} ${hh}:${mm} WIB`,
-    obj: d
-  };
+  const mon = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
+  const hh = String(d.getHours()).padStart(2,'0'), mm = String(d.getMinutes()).padStart(2,'0');
+  return { long: `${days[d.getDay()]}, ${d.getDate()} ${mon[d.getMonth()]} ${d.getFullYear()} — ${hh}:${mm}`,
+           short: `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()} ${hh}:${mm}` };
 }
-function updateTimestamp() {
-  const ts = getNow();
-  state.timestamp = ts;
-  document.getElementById('ts-text').textContent = ts.display;
+function tick() {
+  const d = new Date();
+  document.getElementById('ts-text').textContent = fmtNow(d).long;
+  const wp = document.getElementById('week-pill');
+  wp.textContent = 'Minggu ' + isoWeek(d) + (d.getDay() === 1 ? '' : ' · bukan hari Senin');
+  wp.className = 'pill' + (d.getDay() === 1 ? '' : ' warn');
 }
-updateTimestamp();
-setInterval(updateTimestamp, 30000);
 
-// ── FILE TRIGGER ──
-function triggerFile(id) { document.getElementById(id).click(); }
-// (fungsi di atas tetap ada sebagai fallback)
-
-// ── PHOTO HANDLER ──
-function handlePhoto(input, type) {
+// ── FOTO ──
+function handlePhoto(input, n) {
   const file = input.files[0];
+  input.value = '';
+  const err = document.getElementById('err-' + n);
+  err.style.display = 'none';
   if (!file) return;
+  if (!file.type.startsWith('image/')) { showPhotoErr(n, 'File harus berupa foto.'); return; }
+  const ageMin = (Date.now() - file.lastModified) / 60000;
+  if (file.lastModified && ageMin > CONFIG.MAX_PHOTO_AGE_MIN) {
+    showPhotoErr(n, `Foto ini diambil ${Math.round(ageMin)} menit lalu. Ambil foto baru langsung dari kamera.`);
+    return;
+  }
   const reader = new FileReader();
-  reader.onload = (e) => {
+  reader.onload = e => {
     const img = new Image();
-    img.onload = () => {
-      state.photos[type] = img;
-      renderPhotoBox(type, e.target.result);
-      updateChecklist();
-      checkReady();
-    };
+    img.onload = () => { state.photos[n] = img; renderBox(n, e.target.result); refresh(); };
+    img.onerror = () => showPhotoErr(n, 'Foto tidak bisa dibaca. Coba ambil ulang.');
     img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
-
-function renderPhotoBox(type, src) {
-  const box = document.getElementById('box-' + type);
+function showPhotoErr(n, msg) {
+  const err = document.getElementById('err-' + n);
+  err.textContent = msg; err.style.display = 'block';
+}
+function renderBox(n, src) {
+  const box = document.getElementById('box-' + n);
   box.classList.add('has-photo');
-  // Input file TIDAK dimasukkan ke dalam box — sudah ada di luar, dipicu via onclick box
-  box.innerHTML = `
-    <img class="preview" src="${src}" alt="Foto ${type}">
-    <div class="done-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-    <div class="retry-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.7"/></svg> Ganti</div>
-  `;
+  box.innerHTML = `<img src="${src}" alt="Foto ${n}">
+    <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="act">Ganti</div>`;
 }
 
-function updateChecklist() {
-  const okIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
-  const waitIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>`;
-  const chkM = document.getElementById('chk-masker');
-  const chkS = document.getElementById('chk-sepatu');
-  if (state.photos.masker) { chkM.classList.add('ok'); chkM.innerHTML = okIcon + ' Foto masker ✓'; }
-  else { chkM.classList.remove('ok'); chkM.innerHTML = waitIcon + ' Foto masker belum diupload'; }
-  if (state.photos.sepatu) { chkS.classList.add('ok'); chkS.innerHTML = okIcon + ' Foto sepatu ✓'; }
-  else { chkS.classList.remove('ok'); chkS.innerHTML = waitIcon + ' Foto sepatu belum diupload'; }
-}
-
-// ── CHECK READY ──
-function checkReady() {
-  const sc = document.getElementById('sc').value.trim();
-  const tek = document.getElementById('teknisi').value.trim();
-  const lap = document.getElementById('laporan').value.trim();
-  const hasPhotos = state.photos.masker && state.photos.sepatu;
-  const ready = sc && tek && lap && hasPhotos;
-
-  // Progress
-  const p1 = sc && tek;
-  const p2 = p1 && lap;
-  const p3 = p2 && hasPhotos;
-  document.getElementById('prog-1').className = 'progress-step ' + (p1 ? 'done' : 'active');
-  document.getElementById('prog-2').className = 'progress-step ' + (p2 ? 'done' : (p1 ? 'active' : ''));
-  document.getElementById('prog-3').className = 'progress-step ' + (p3 ? 'done' : (p2 ? 'active' : ''));
-
-  const btn = document.getElementById('btn-download');
-  const hint = document.getElementById('hint-text');
-  const dlIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
-
-  if (ready) {
-    btn.disabled = false;
-    btn.innerHTML = dlIcon + ' Download hasil foto';
-    hint.textContent = 'Simpan gambar lalu upload ke sistem teknisi';
-    generatePreview();
-    document.getElementById('card-preview').style.display = 'block';
-  } else {
-    btn.disabled = true;
-    btn.innerHTML = dlIcon + ' Lengkapi data untuk download';
-    const missing = [];
-    if (!sc) missing.push('service center');
-    if (!tek) missing.push('nama teknisi');
-    if (!lap) missing.push('nomor laporan');
-    if (!state.photos.masker) missing.push('foto masker');
-    if (!state.photos.sepatu) missing.push('foto sepatu');
-    hint.textContent = 'Masih kurang: ' + missing.join(', ');
-  }
-}
-
-// ── CANVAS RENDER ──
-function renderToCanvas(canvas, W) {
+// Kompres + watermark (nama, SC, waktu) langsung di foto sebagai bukti
+function preparePhoto(img, label) {
+  const c = document.getElementById('work-canvas');
+  const scale = Math.min(1, CONFIG.PHOTO_MAX_SIDE / Math.max(img.width, img.height));
+  const W = Math.round(img.width * scale), H = Math.round(img.height * scale);
+  c.width = W; c.height = H;
+  const ctx = c.getContext('2d');
+  ctx.drawImage(img, 0, 0, W, H);
   const sc = document.getElementById('sc').value;
-  const tek = document.getElementById('teknisi').value;
-  const lap = document.getElementById('laporan').value;
-  const ts = state.timestamp;
-  const H = Math.round(W * 0.72);
-  const halfW = Math.floor(W / 2) - 3;
-  const photoH = H - Math.round(H * 0.22);
-  canvas.width = W; canvas.height = H;
-  const ctx = canvas.getContext('2d');
-
-  ctx.fillStyle = '#f5f6f7';
-  ctx.fillRect(0, 0, W, H);
-
-  if (state.photos.masker) drawCropped(ctx, state.photos.masker, 0, 0, halfW, photoH);
-  if (state.photos.sepatu) drawCropped(ctx, state.photos.sepatu, halfW + 6, 0, halfW, photoH);
-
+  const selT = document.getElementById('teknisi');
+  const tek = selT.options[selT.selectedIndex].text.replace(/ \(.*\)$/, '') + ' · ' + selT.value;
+  const fs = Math.max(14, Math.round(W * 0.028)), pad = Math.round(fs * 0.6), barH = fs * 3 + pad;
+  ctx.fillStyle = 'rgba(26,58,92,0.85)';
+  ctx.fillRect(0, H - barH, W, barH);
   ctx.fillStyle = '#fff';
-  ctx.fillRect(halfW, 0, 6, photoH);
-
-  const lH = Math.round(H * 0.058);
-  const lF = Math.round(W * 0.022);
-  ctx.font = `500 ${lF}px -apple-system, sans-serif`;
-
-  ctx.fillStyle = 'rgba(0,0,0,0.58)';
-  ctx.fillRect(0, 0, halfW, lH + 4);
-  ctx.fillStyle = '#fff';
-  ctx.fillText('Masker terpasang  ✓', 10, lH - 3);
-
-  ctx.fillStyle = 'rgba(0,0,0,0.58)';
-  ctx.fillRect(halfW + 6, 0, halfW, lH + 4);
-  ctx.fillStyle = '#fff';
-  ctx.fillText('Sepatu pengganti  ✓', halfW + 16, lH - 3);
-
-  // Info bar
-  const barY = photoH;
-  const barH = H - photoH;
-  ctx.fillStyle = '#1a3a5c';
-  ctx.fillRect(0, barY, W, barH);
-
-  const pad = Math.round(W * 0.022);
-  const row1Y = barY + Math.round(barH * 0.33);
-  const row2Y = barY + Math.round(barH * 0.68);
-  const f1 = Math.round(W * 0.026);
-  const f2 = Math.round(W * 0.021);
-
-  ctx.fillStyle = '#fff';
-  ctx.font = `600 ${f1}px -apple-system, sans-serif`;
-  ctx.fillText(lap, pad, row1Y);
-  const lapW = ctx.measureText(lap).width;
-
-  ctx.font = `400 ${f2}px -apple-system, sans-serif`;
-  ctx.fillStyle = 'rgba(255,255,255,0.5)';
-  const sep = '   |   ';
-  ctx.fillText(sep, pad + lapW, row1Y);
-  const sepW = ctx.measureText(sep).width;
-
+  ctx.font = `600 ${fs}px -apple-system, sans-serif`;
+  ctx.fillText(tek, pad, H - barH + fs + pad / 2, W - pad * 2);
+  ctx.font = `400 ${Math.round(fs * 0.85)}px -apple-system, sans-serif`;
   ctx.fillStyle = 'rgba(255,255,255,0.85)';
-  ctx.fillText(sc, pad + lapW + sepW, row1Y);
-
-  ctx.fillStyle = 'rgba(255,255,255,0.75)';
-  ctx.font = `400 ${f2}px -apple-system, sans-serif`;
-  ctx.fillText(tek, pad, row2Y);
-  const tekW = ctx.measureText(tek).width;
-  ctx.fillStyle = 'rgba(255,255,255,0.45)';
-  ctx.fillText(sep, pad + tekW, row2Y);
-  ctx.fillStyle = 'rgba(255,255,255,0.65)';
-  ctx.fillText(ts ? ts.compact : '', pad + tekW + sepW, row2Y);
-
-  const brand = 'APD Monitoring — After Sales';
-  ctx.font = `400 ${Math.round(W * 0.017)}px -apple-system, sans-serif`;
-  ctx.fillStyle = 'rgba(255,255,255,0.3)';
-  const bW = ctx.measureText(brand).width;
-  ctx.fillText(brand, W - bW - pad, row2Y);
+  ctx.fillText(`${sc} · ${fmtNow(new Date()).short} WIB · ${label}`, pad, H - barH + fs * 2.3 + pad / 2, W - pad * 2);
+  let q = 0.85, url = c.toDataURL('image/jpeg', q);
+  while (url.length * 0.75 > CONFIG.PHOTO_MAX_KB * 1024 && q > 0.35) { q -= 0.1; url = c.toDataURL('image/jpeg', q); }
+  return url.split(',')[1];
 }
 
-function drawCropped(ctx, img, x, y, w, h) {
-  const ar = img.width / img.height;
-  const bar = w / h;
-  let sx, sy, sw, sh;
-  if (ar > bar) { sh = img.height; sw = sh * bar; sx = (img.width - sw) / 2; sy = 0; }
-  else { sw = img.width; sh = sw / bar; sx = 0; sy = (img.height - sh) / 2; }
-  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
-}
-
-function generatePreview() {
-  renderToCanvas(document.getElementById('result-canvas'), 680);
-}
-
-// ── COMPRESS IMAGE untuk upload (maks ~300KB) ──
-function compressImage(canvas, maxSizeKB = 300) {
-  let quality = 0.85;
-  let dataUrl = canvas.toDataURL('image/jpeg', quality);
-  while (dataUrl.length * 0.75 > maxSizeKB * 1024 && quality > 0.2) {
-    quality -= 0.1;
-    dataUrl = canvas.toDataURL('image/jpeg', quality);
-  }
-  return dataUrl.split(',')[1]; // return base64 only (tanpa prefix)
-}
-
-// ── KIRIM DATA + FOTO KE GOOGLE SHEETS / DRIVE ──
-async function sendToSheet(downloadTime) {
-  try {
-    // Buat canvas kecil untuk foto masker
-    const canvasMasker = document.createElement('canvas');
-    canvasMasker.width = 800; canvasMasker.height = 600;
-    const ctxM = canvasMasker.getContext('2d');
-    if (state.photos.masker) drawCropped(ctxM, state.photos.masker, 0, 0, 800, 600);
-    const fotoMaskerB64 = compressImage(canvasMasker);
-
-    // Buat canvas kecil untuk foto sepatu
-    const canvasSepatu = document.createElement('canvas');
-    canvasSepatu.width = 800; canvasSepatu.height = 600;
-    const ctxS = canvasSepatu.getContext('2d');
-    if (state.photos.sepatu) drawCropped(ctxS, state.photos.sepatu, 0, 0, 800, 600);
-    const fotoSepatuB64 = compressImage(canvasSepatu);
-
-    const payload = {
-      wo:          document.getElementById('laporan').value.trim(),
-      teknisi:     document.getElementById('teknisi').value,
-      sc:          document.getElementById('sc').value,
-      downloadTime: downloadTime,
-      fotoMasker:  fotoMaskerB64,
-      fotoSepatu:  fotoSepatuB64,
-    };
-
-    await fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode:   'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-  } catch (err) {
-    console.warn('Gagal kirim ke sheet:', err);
+// ── VALIDASI & TOMBOL ──
+function refresh() {
+  if (state.sending) return;
+  const sc = document.getElementById('sc').value, tek = document.getElementById('teknisi').value;
+  const answered = ITEMS.filter(it => state.answers[it.key]).length;
+  const p1 = !!(sc && tek), p2 = p1 && !!state.photos[1], p3 = p2 && answered === ITEMS.length;
+  [p1, p2, p3].forEach((done, i) => {
+    const prev = i === 0 ? true : [p1, p2][i - 1];
+    document.getElementById('prog-' + (i + 1)).className = 'progress-step ' + (done ? 'done' : (prev ? 'active' : ''));
+  });
+  const btn = document.getElementById('btn-submit'), hint = document.getElementById('hint');
+  btn.disabled = !p3;
+  if (p3) {
+    btn.textContent = 'Kirim laporan grooming';
+    hint.textContent = 'Laporan hanya bisa dikirim 1 kali per minggu';
+  } else {
+    btn.textContent = 'Lengkapi data untuk kirim';
+    const miss = [];
+    if (!sc) miss.push('service center');
+    if (!tek) miss.push('nama teknisi');
+    if (!state.photos[1]) miss.push('Foto 1');
+    if (answered < ITEMS.length) miss.push(`cek mandiri (${answered}/${ITEMS.length})`);
+    hint.textContent = 'Masih kurang: ' + miss.join(', ');
   }
 }
 
-// ── DOWNLOAD ──
-function downloadResult() {
-  const lap = document.getElementById('laporan').value.trim();
-  const tek = document.getElementById('teknisi').value.replace(/\s+/g, '_');
-  const ts = state.timestamp;
-  const d = ts ? ts.obj : new Date();
-  const dateStr = `${d.getDate()}${d.getMonth()+1}${d.getFullYear()}`;
-  const hiddenCanvas = document.getElementById('hidden-canvas');
-  renderToCanvas(hiddenCanvas, 1200);
-  setTimeout(() => {
-    const link = document.createElement('a');
-    link.download = `APD_${lap}_${tek}_${dateStr}.jpg`;
-    link.href = hiddenCanvas.toDataURL('image/jpeg', 0.92);
-alert("KIRIM DATA KE GOOGLE SHEET");
-fetch(
-'https://script.google.com/macros/s/AKfycbzgLBdQC0tvbsk5nxlJYXCIUUqQaCyYtfsHUBN0ClZmrBEqvcCAMmXehVcVto8NTZj3/exec',
-{
-  method:'POST',
-  mode:'no-cors',
-  headers:{
-    'Content-Type':'application/json'
-  },
-  body:JSON.stringify({
-    wo:lap,
-    teknisi:document.getElementById('teknisi').value,
-    sc:document.getElementById('sc').value,
-    downloadTime:new Date().toLocaleString()
-  })
-});
-    link.click();
-  }, 50);
+// ── KIRIM ──
+async function submitReport() {
+  if (state.sending) return;
+  if (!CONFIG.SCRIPT_URL.startsWith('https://script.google.com/')) {
+    showResult(false, 'Halaman belum dikonfigurasi', 'SCRIPT_URL belum diisi. Hubungi admin After Sales.');
+    return;
+  }
+  state.sending = true;
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div> Mengirim...';
+  document.getElementById('result').className = 'result';
+
+  const payload = {
+    action: 'submit',
+    sc: document.getElementById('sc').value,
+    idTeknisi: document.getElementById('teknisi').value,
+    answers: state.answers,
+    foto1: preparePhoto(state.photos[1], 'Badan penuh'),
+    foto2: state.photos[2] ? preparePhoto(state.photos[2], 'Wajah') : '',
+    clientTime: new Date().toISOString(),
+    userAgent: navigator.userAgent.slice(0, 200)
+  };
+
+  // Tanpa header Content-Type kustom → "simple request", tidak perlu preflight CORS,
+  // dan balasan Apps Script tetap bisa dibaca.
+  let lastErr = '';
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch(CONFIG.SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (data.ok) {
+        showResult(true, 'Laporan terkirim', `Minggu <code>${data.weekId}</code> · ${data.timing}<br>ID laporan: <code>${data.submissionId}</code><br>Hasil review akan diisi oleh admin cabang.`);
+        document.getElementById('form-area').style.display = 'none';
+        state.sending = false;
+        return;
+      }
+      // Ditolak server (mis. sudah lapor minggu ini) → jangan diulang
+      showResult(false, 'Laporan tidak diterima', data.message || 'Terjadi kesalahan.');
+      state.sending = false; refresh();
+      return;
+    } catch (e) {
+      lastErr = e.message;
+      await new Promise(r => setTimeout(r, 1500 * attempt));
+    }
+  }
+  showResult(false, 'Gagal mengirim', 'Koneksi bermasalah. Pastikan sinyal stabil lalu tekan Kirim lagi. (' + lastErr + ')');
+  state.sending = false; refresh();
+}
+
+function showResult(ok, title, html) {
+  const r = document.getElementById('result');
+  r.className = 'result ' + (ok ? 'ok' : 'err');
+  r.innerHTML = `<b>${title}</b><p>${html}</p>`;
+  r.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 </script>
 </body>
